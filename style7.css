@@ -1,0 +1,24 @@
+
+.buttons{
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    /* margin-bottom: 5px; */
+}
+.imagescc{
+    display: flex;
+    
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+button{
+    
+    background-color: rgb(76, 102, 76); 
+    height: 50px; 
+    width: 100px ; 
+    color: rgb(224, 161, 12); 
+    border: 4cap; 
+    border-color: rgb(238, 227, 212);
+    margin: 0 20px;
+}
