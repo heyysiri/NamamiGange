@@ -9,6 +9,15 @@ stories:
   - intent: mood_great
   - action: utter_happy
 
+- story: questions
+  steps:
+  - intent: NG_Q1
+  - action: utter_NG_Q1
+  - intent: NG_Q2
+  - action: utter_NG_Q2
+  - intent: NG_Q3
+  - action: utter_NG_Q3
+
 - story: sad path 1
   steps:
   - intent: greet

@@ -1,6 +1,7 @@
 version: "3.1"
 
 nlu:
+
 - intent: greet
   examples: |
     - hey
@@ -89,3 +90,29 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+- intent: NG_Q1
+  examples: |
+    - what is Namami Gange?
+    - what can you tell me about Namami Gange?
+    - what is the Namami Gange program?
+    - what is the Namami Gange project?
+    - what is the Namami Gange mission?
+    - what is the Namami Gange initiative?
+    - what is the Namami Gange campaign?
+    - what is the Namami Gange scheme?
+    - what is the Namami Gange yojana?
+
+- intent: NG_Q2
+  examples: |
+    - What is the history of Ganga?
+    - What is  the history of Ganges?
+    - What is the history of Ganga River?
+    - What is the story of Ganges River?
+
+- intent: NG_Q3
+  examples: |
+    - Explain about River Conservation?
+    - Explain about Ganga River Conservation?
+    - Why is River Conservation important?
+

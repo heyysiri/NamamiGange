@@ -5,8 +5,16 @@
     align-items: center;
     /* margin-bottom: 5px; */
 }
+.chat-container {
+    position: fixed; 
+    /* top: 100px; */
+    right: 10px;
+    width: 300px;
+  }
 .imagescc{
-    display: flex;
+    
+        display: flex;
+      
 }
 button{
     

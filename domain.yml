@@ -8,26 +8,39 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - NG_Q1
+  - NG_Q2
+  - NG_Q3
+
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: "Welcome to Namami Gange Program!"
 
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+  - text: "Here is something to make you happy:"
+    image: "https://img.wattpad.com/cover/202051181-256-k860990.jpg"
 
   utter_did_that_help:
   - text: "Did that help you?"
 
   utter_happy:
   - text: "Great, carry on!"
-
+  
   utter_goodbye:
-  - text: "Bye"
+  - text: "Alright! Goodbye!"
 
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  - text: "I am a bot, powered by Siri."
+  
+  utter_NG_Q1:
+  - text: "Namami Gange is a comprehensive program in India aimed at the rejuvenation and conservation of the Ganges River. It focuses on cleaning and restoring the ecological health of the river, promoting sustainable development along its banks, and ensuring the uninterrupted flow of its waters to benefit millions of people dependent on it. The program involves various projects, policies, and initiatives to achieve these objectives."
+
+  utter_NG_Q2:
+  - text: "The Ganges River, one of the holiest in India, has faced severe pollution and degradation due to industrial and urban activities. The Namami Gange project was launched in 2014 to address these issues, with the goal of cleaning and rejuvenating the river. It involves various initiatives, including sewage treatment plants, riverfront development, and awareness campaigns, to restore the Ganges' environmental and cultural significance."
+
+  utter_NG_Q3:
+  - text: "River conservation involves protecting and preserving rivers and their ecosystems to maintain biodiversity, water quality, and ecosystem services. It is crucial because rivers are vital sources of freshwater, support diverse habitats, and sustain countless species. Additionally, they provide essential resources for human consumption, agriculture, and industry, making their conservation vital for both the environment and society."
 
 session_config:
   session_expiration_time: 60

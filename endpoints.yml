@@ -2,7 +2,8 @@
 
 # Server where the models are pulled from.
 # https://rasa.com/docs/rasa/model-storage#fetching-models-from-a-server
-
+rest:
+  #pass
 #models:
 #  url: http://my-server.com/models/default_core@latest
 #  wait_time_between_pulls:  10   # [optional](default: 100)
@@ -35,14 +36,19 @@
 # Event broker which all conversation events should be streamed to.
 # https://rasa.com/docs/rasa/event-brokers
 
-#event_broker:
+# event_broker:
 #  url: localhost
 #  username: username
 #  password: password
-#  queue: queue
+#  queue: my_rasa_bot
 action_endpoint:
   url: "http://localhost:5005/webhook"
 
-# models:
-#   url: http://your-server.com/models/default_core@latest
-#   wait_time_between_pulls: 10
+# # models:
+# #   url: http://your-server.com/models/default_core@latest
+# #   wait_time_between_pulls: 10
+# model:
+#   name: "20231025-184437-feldspar-line.tar.gz"
+#   path: "C:/Users/sirik/CBproject/models/20231025-184437-feldspar-line.tar.gz"
+
+
