@@ -6,25 +6,20 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
+  - action: action_weather
+  - action: utter_mood
   - intent: mood_great
   - action: utter_happy
-
-- story: questions
-  steps:
-  - intent: NG_Q1
-  - action: utter_NG_Q1
-  - intent: NG_Q2
-  - action: utter_NG_Q2
-  - intent: NG_Q3
-  - action: utter_NG_Q3
 
 - story: sad path 1
   steps:
   - intent: greet
   - action: utter_greet
+  - action: action_weather
+  - action: utter_mood
   - intent: mood_unhappy
   - action: utter_cheer_up
-  - action: utter_did_that_help
+  - action: utter_did_that_help_mood
   - intent: affirm
   - action: utter_happy
 
@@ -32,8 +27,86 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
+  - action: action_weather
+  - action: utter_mood
   - intent: mood_unhappy
   - action: utter_cheer_up
-  - action: utter_did_that_help
+  - action: utter_did_that_help_mood
   - intent: deny
+  - action: utter_something_better
+
+- story: GPT4 interaction
+  steps:
+  - intent: generate_text
+  - action: action_gpt2
+
+- story: interactive_story_1
+  steps:
+  - intent: goodbye
   - action: utter_goodbye
+  - action: utter_ask_fb
+  - intent: emo_fb
+    entities:
+    - rating: '1'
+  - slot_was_set:
+    - rating: '1'
+  - action: utter_suggestions
+  - intent: text_fb
+  - action: action_feedback1
+
+- story: interactive_story_2
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: utter_ask_fb
+  - intent: emo_fb
+    entities:
+    - rating: '2'
+  - slot_was_set:
+    - rating: '2'
+  - action: utter_suggestions
+  - intent: text_fb
+  - action: action_feedback1
+
+- story: interactive_story_3
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: utter_ask_fb
+  - intent: emo_fb
+    entities:
+    - rating: '3'
+  - slot_was_set:
+    - rating: '3'
+  - action: utter_suggestions
+  - intent: text_fb
+  - action: action_feedback1
+
+
+- story: interactive_story_4
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: utter_ask_fb
+  - intent: emo_fb
+    entities:
+    - rating: '4'
+  - slot_was_set:
+    - rating: '4'
+  - action: utter_suggestions
+  - intent: text_fb
+  - action: action_feedback1
+
+- story: interactive_story_5
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: utter_ask_fb
+  - intent: emo_fb
+    entities:
+    - rating: '5'
+  - slot_was_set:
+    - rating: '5'
+  - action: utter_suggestions
+  - intent: text_fb
+  - action: action_feedback1

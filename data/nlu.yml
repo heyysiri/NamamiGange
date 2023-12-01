@@ -1,7 +1,5 @@
 version: "3.1"
-
 nlu:
-
 - intent: greet
   examples: |
     - hey
@@ -17,7 +15,6 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
 - intent: goodbye
   examples: |
     - cu
@@ -30,7 +27,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
 - intent: affirm
   examples: |
     - yes
@@ -39,7 +35,8 @@ nlu:
     - of course
     - that sounds good
     - correct
-
+    - it helped
+    - yess
 - intent: deny
   examples: |
     - no
@@ -49,7 +46,7 @@ nlu:
     - don't like that
     - no way
     - not really
-
+    - nope
 - intent: mood_great
   examples: |
     - perfect
@@ -66,7 +63,6 @@ nlu:
     - so so perfect
     - so good
     - so perfect
-
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -83,36 +79,92 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-
-- intent: NG_Q1
+- intent: text_fb
   examples: |
-    - what is Namami Gange?
-    - what can you tell me about Namami Gange?
-    - what is the Namami Gange program?
-    - what is the Namami Gange project?
-    - what is the Namami Gange mission?
-    - what is the Namami Gange initiative?
-    - what is the Namami Gange campaign?
-    - what is the Namami Gange scheme?
-    - what is the Namami Gange yojana?
+    - very nice experience
+    - good
+    - bad
+    - very bad
+    - could be better
+    - could've been better
+    - could've been trained better
+    - very bad
+    - i learnt well!
+    - i learnt a lot!
+    - could've been better
 
-- intent: NG_Q2
+- intent: generate_text
   examples: |
-    - What is the history of Ganga?
-    - What is  the history of Ganges?
-    - What is the history of Ganga River?
-    - What is the story of Ganges River?
-
-- intent: NG_Q3
+    - What is the Namami Gange program?
+    - What is the Namami Gange program all about?
+    - What is the Namami Gange program about?
+    - What is the Namami Gange program for?
+    - What are the goals of the Namami Gange program?
+    - What are the objectives of the Namami Gange program?
+    - What are the challenges to cleaning up the Ganga river?
+    - What are the major components of the Namami Gange program?
+    - What progress has been made under the Namami Gange program so far?
+    - How can the public participate in the Namami Gange program?
+    - What are the benefits of cleaning up the Ganga river?
+    - What are the benefits of cleaning up the Ganga river basin?
+    - What are the historical and cultural significance of the Ganga river?
+    - What are the major tributaries of the Ganga river?
+    - What are the major rivers that flow into the Ganga river?
+    - What are the major rivers that flow out of the Ganga river?
+    - What are the major rivers that flow through the Ganga river basin?
+    - What is the length of the Ganga river?
+    - What is the total area of the Ganga river basin?
+    - What is the total population of the Ganga river basin?
+    - Where does the Ganga river originate and where does it flow into?
+    - What are the major cities and towns located along the Ganga river?
+    - What are the major religious sites located along the Ganga river?
+    - What are the major tourist attractions located along the Ganga river?
+    - What are the major industries and economic activities that take place along the Ganga river?
+    - What are the major environmental problems that the Ganga river faces?
+    - What are the major conservation efforts that are being undertaken to protect the Ganga river?
+    - What are the different types of pollution that affect the Ganga river?
+    - What are the impacts of pollution on the Ganga river ecosystem?
+    - What are the impacts of pollution on the Ganga river biodiversity?
+    - How does the pollution in the Ganga river affect human health?
+    - What are the different ways to reduce pollution in the Ganga river?
+    - What are the different ways to conserve water resources in the Ganga river basin?
+    - What are the different ways to conserve biodiversity in the Ganga river basin?
+    - What are the different ways to conserve wildlife in the Ganga river basin?
+    - What are the different ways to conserve forests in the Ganga river basin?
+    - What are the different ways to conserve wetlands in the Ganga river basin?
+    - What are the different ways to conserve grasslands in the Ganga river basin?
+    - What are the different ways to promote sustainable development in the Ganga river basin?
+    - What are the different ways to promote sustainable tourism in the Ganga river basin?
+    - What would the Ganga river be like if it were completely clean?
+    - What would the Ganga river be like if it were completely free of pollution?
+    - What would the Ganga river be like if it were completely free of human activity?
+    - What would the Ganga river be like if it were completely free of industrial activity?
+    - What would the Ganga river's message be to humanity if it could speak?
+    - What would the Ganga river say to humanity if it could speak?
+    - What would be the most effective way to raise awareness about the importance of cleaning up the Ganga river?
+    - What would be the most effective way to raise awareness about the importance of protecting the Ganga river?
+    - What would you do to help clean up the Ganga river?
+    - What would you do to help protect the Ganga river?
+    - What would you do to help conserve the Ganga river?
+    - What kind of future do you envision for the Ganga river?
+    - What kind of future do you envision for the Ganga river basin?
+    - What kind of future do you envision for the people living in the Ganga river basin?
+- intent: emo_fb
   examples: |
-    - Explain about River Conservation?
-    - Explain about Ganga River Conservation?
-    - Why is River Conservation important?
-
+    - my feedback is [1](rating)
+    - my feedback is [2](rating)
+    - my feedback is [3](rating)
+    - my feedback is [4](rating)
+    - my feedback is [5](rating)
+    - my feedback is [3](rating)
+    - [1](rating)
+    - [2](rating)
+    - [3](rating)
+    - [4](rating)
+    - [5](rating)

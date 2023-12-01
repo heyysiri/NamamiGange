@@ -1,7 +1,10 @@
 .rasa
-rasa-env
+rasa-env/Scripts
+rasa-env/Lib
+rasa-env/Include
 models
 style1.css
 style2.css
 index7.html
 index8.html
+styleCR
