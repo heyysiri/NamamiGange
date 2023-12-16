@@ -20,10 +20,10 @@ slots:
     - type: from_entity
       entity: rating
 actions:
-# - utter_ask_fb
-# - utter_goodbye
-# - utter_suggestions
+- utter_suggestions
+- utter_goodbye
 - action_feedback1
+- utter_ask_fb
 - action_gpt2
 - action_weather
 responses:
@@ -51,7 +51,7 @@ responses:
   utter_sorry:
   - text: Sorry! I will try to do better next time!
   utter_ask_fb:
-  - text: 'Please provide a rating:'
+  - text: 'Please provide a rating (1-5):'
   utter_fb_back:
   - text: You gave a {rating}
   utter_suggestions:

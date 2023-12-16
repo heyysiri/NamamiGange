@@ -47,6 +47,7 @@ nlu:
     - no way
     - not really
     - nope
+    - not at all
 - intent: mood_great
   examples: |
     - perfect
@@ -58,7 +59,7 @@ nlu:
     - I am great
     - I am amazing
     - I am going to save the world
-    - super stoked
+    - awesome
     - extremely good
     - so so perfect
     - so good
@@ -69,7 +70,6 @@ nlu:
     - I am sad
     - I don't feel very well
     - I am disappointed
-    - super sad
     - I'm so sad
     - sad
     - very sad
@@ -88,17 +88,38 @@ nlu:
 - intent: text_fb
   examples: |
     - very nice experience
-    - good
-    - bad
+    - super 
+    - terrible
     - very bad
     - could be better
     - could've been better
     - could've been trained better
-    - very bad
     - i learnt well!
     - i learnt a lot!
-    - could've been better
-
+    - it's the best
+    - i liked it 
+    - better than i thought
+    - satisfactory experience
+    - not satisfactory
+    - below expectations
+    - exceeded expectations
+    - informative and helpful
+    - not very informative
+    - confusing information
+    - very informative content
+    - easy to understand
+    - difficult to understand
+    - engaging content
+    - not engaging enough
+    - insightful and valuable
+    - lacking depth
+    - too basic for me
+    - provided great insights
+    - insightful and practical
+    - actionable advice given
+    - needs more actionable advice
+    - clear and concise content
+    - content lacks clarity
 - intent: generate_text
   examples: |
     - What is the Namami Gange program?
@@ -162,9 +183,9 @@ nlu:
     - my feedback is [3](rating)
     - my feedback is [4](rating)
     - my feedback is [5](rating)
-    - my feedback is [3](rating)
     - [1](rating)
     - [2](rating)
     - [3](rating)
     - [4](rating)
     - [5](rating)
+    - [4](rating)
