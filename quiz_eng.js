@@ -105,6 +105,12 @@ gif.style.height = 'auto';
 const gifContainer = document.querySelector('.gif-container');
 function loadQuestion() {
   const q = questions[currentQuestion];
+  if (currentQuestion === questions.length) {
+    quizContainer.style.display = "none";
+    messageElem.textContent = `Hope you had fun taking the quiz!`;
+    messageElem.style.display = "block";
+    messageElem.style.opacity = "1";
+  }
   questionElem.textContent = q.question;
   optionsElem.innerHTML = "";
 
@@ -116,13 +122,6 @@ function loadQuestion() {
 
     btn.addEventListener("click", checkAnswer);
   });
-
-  if (currentQuestion === questions.length) {
-    quizContainer.style.display = "none";
-    messageElem.textContent = `Hope you had fun taking the quiz!`;
-    messageElem.style.display = "block";
-    messageElem.style.opacity = "1";
-  }
 }
 
 function checkAnswer(e) {
@@ -153,7 +152,7 @@ function checkAnswer(e) {
       messageElem.style.display = 'none'; // Hide message element after delay
       loadQuestion();
       displayMessage();
-    }, 3000); // Set delay to 5 seconds
+    }, 1000); // Set delay to 5 seconds
   
   } else if (currentQuestion < questions.length) {
     loadQuestion();

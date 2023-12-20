@@ -23,7 +23,7 @@ body {
   
   .question{
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; 
   }
   .options button {
     display: block;
@@ -38,7 +38,7 @@ body {
     color: white;
     cursor: pointer;
     font-size: small;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; 
     transition: background-color 0.3s ease;
   }
   
