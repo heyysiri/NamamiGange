@@ -1,57 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import MyPopup from "./Popup";
 import "./styles.css";
 
 const host = ""; // Change this to your desired localhost host
 
 function App() {
- const [messages, setMessages] = useState([]);
- const [inputText, setInputText] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [inputText, setInputText] = useState("");
+  //const [isCursorOverChat, setIsCursorOverChat] = useState(false);
+  const messagesRef = useRef(null);
+  const [showPopup, setShowPopup] = useState(false);
 
- const handleSendMessage = () => {
+  const handlePopupToggle = () => {
+    setShowPopup(!showPopup);
+  };
+
+
+  const handleSendMessage = () => {
     if (inputText.trim() !== "") {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: inputText, sender: "user" }
+        { text: inputText, sender: "user" },
+        { text: "I am a chatbot response.", sender: "bot" },
       ]);
 
       setInputText("");
-
-      setTimeout(() => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { text: "I am a chatbot response.", sender: "bot" }
-        ]);
-      }, 500);
     }
- };
+  };
 
- const handleSpeechToText = () => {
-    if (window.hasOwnProperty("webkitSpeechRecognition")) {
-      const recognition = new window.webkitSpeechRecognition();
-      recognition.lang = "en-US";
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
+  const handleSpeechToText = () => {
+    // Your speech-to-text logic here
+  };
 
-      recognition.start();
-
-      recognition.onresult = function (event) {
-        const transcript = event.results[0][0].transcript;
-        setInputText(transcript);
-        handleSendMessage();
-      };
-
-      recognition.onerror = function (event) {
-        console.log("Error occurred in recognition: ", event.error);
-      };
-    } else {
-      alert("Your browser does not support speech recognition.");
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTo({
+        behavior: "smooth",
+        top: messagesRef.current.scrollHeight,
+      });
     }
- };
+  }, [messages]);
 
- return (
-    <div className="app">
+  return (
+    <div
+      className="app"
+      //onMouseEnter={() => setIsCursorOverChat(true)}
+      //onMouseLeave={() => setIsCursorOverChat(false)}
+    >
+      {showPopup && <div className="chat-overlay"/>}
       <div className="chat-room">
-        <div className="messages">
+        <div className="messages" ref={messagesRef}>
           {messages.map((message, index) => (
             <div key={index} className={message.sender}>
               <div className="chat-bubble border round">{message.text}</div>
@@ -66,12 +64,18 @@ function App() {
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
           />
-          <button onClick={handleSendMessage} class="button1">{" "}</button>
-          <button onClick={handleSpeechToText} class="button2">{" "}</button>
+          <button onClick={handleSendMessage} className="button1"></button>
+          <button onClick={handleSpeechToText} className="button2"></button>
+          <button onClick={handlePopupToggle} className="button3"></button>
         </div>
       </div>
+      {showPopup && (
+        <MyPopup onClose={handlePopupToggle}>
+        </MyPopup>
+      )}
     </div>
- );
+
+  );
 }
 
 export default App;
