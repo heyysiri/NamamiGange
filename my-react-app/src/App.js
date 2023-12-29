@@ -15,7 +15,20 @@ function App() {
     ]);
 
     setInputText("");
-
+    const handleTextToSpeech = (text) => {
+      if ('speechSynthesis' in window) {
+        const speech = new SpeechSynthesisUtterance();
+        speech.text = text;
+        speech.lang = 'hi-IN'; // Change according to your language
+        speech.pitch = 0.6; // Change the pitch (example value)
+        speech.rate = 1.0; // Change the rate (example value)
+        speech.volume = 1.0;
+        window.speechSynthesis.speak(speech);
+      } else {
+        alert('Your browser does not support Text-to-Speech.');
+      }
+    };
+    
     try {
       const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
         method: 'POST',
@@ -32,6 +45,7 @@ function App() {
           ...prevMessages,
           { text: response.text, sender: "bot" },
         ]);
+        handleTextToSpeech(response.text);
       });
     } catch (error) {
       console.error('Error sending message to Rasa:', error);
@@ -43,7 +57,7 @@ function App() {
  const handleSpeechToText = () => {
     if (window.hasOwnProperty("webkitSpeechRecognition")) {
       const recognition = new window.webkitSpeechRecognition();
-      recognition.lang = "en-US";
+      recognition.lang = "hi-IN";
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 

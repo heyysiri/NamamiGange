@@ -1,36 +1,64 @@
 version: "3.1"
 
 rules:
-
-- rule: Say 'I am a bot' anytime the user challenges
+- rule: bot challenge
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
 
-- rule: Say 'sorry' anytime the user says 'no' to 'did that help'
+- rule: bot challenge hindi
   steps:
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_sorry
+  - intent: bot_challenge_hi
+  - action: utter_iamabot_hi
 
-- rule: Say 'Great' anytime the user affirms
-  steps:
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+# - rule: Activate GPT4
+#   steps:
+#   - intent: generate_text
+#   - action: action_gpt2
+# - rule: greet_user
+#   steps:
+#   - intent: greet
+#   - action: utter_select_language
 
-- rule: Activate GPT4
-  steps:
-  - intent: generate_text
-  - action: action_gpt2
+# - rule: weather_troubles
+#   steps:
+#   - action: select_language_actions
+#   - action: action_weather_eng
+#   wait_for_user_input: false
 
-- rule: getting into actions
+- rule: getting into feedback1
   steps:
   - intent: text_fb
   - action: action_feedback1
+  - action: action_restart
 
+- rule: getting into feedback1_hi
+  steps:
+  - intent: text_fb_hi
+  - action: action_feedback1
+  - action: action_restart
 - rule: say goodbye anytime user says goodbye
   steps:
   - intent: goodbye
   - action: utter_goodbye
   - action: utter_ask_fb
+
+- rule: say goodbye anytime user says goodbye hindi
+  steps:
+  - intent: goodbye_hi
+  - action: utter_goodbye_hi
+  - action: utter_ask_fb_hi
+
+# - rule: deactivate loop after goodbye
+#   steps:
+#   - intent: text_fb
+#   - action: action_feedback1
+#   # - action: action_deactivate_loop
+#   # wait_for_user_input: false
+
+# - rule: deactivate loop after goodbye hindi
+#   steps:
+#   - intent: text_fb_hi
+#   - action: action_feedback1
+#   # - action: action_deactivate_loop
+#   # wait_for_user_input: false
