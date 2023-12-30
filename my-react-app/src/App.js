@@ -19,7 +19,7 @@ function App() {
       if ('speechSynthesis' in window) {
         const speech = new SpeechSynthesisUtterance();
         speech.text = text;
-        speech.lang = 'hi-IN'; // Change according to your language
+        speech.lang = 'en-US'; // Change according to your language
         speech.pitch = 0.6; // Change the pitch (example value)
         speech.rate = 1.0; // Change the rate (example value)
         speech.volume = 1.0;
@@ -57,7 +57,7 @@ function App() {
  const handleSpeechToText = () => {
     if (window.hasOwnProperty("webkitSpeechRecognition")) {
       const recognition = new window.webkitSpeechRecognition();
-      recognition.lang = "hi-IN";
+      recognition.lang = "en-US";
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 

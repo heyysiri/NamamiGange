@@ -173,7 +173,7 @@ class GPT3ChatCompletionActionHindi(Action):
         user_message = tracker.latest_message.get('text')
         language = tracker.get_slot("language")
         language = language.lower()
-        if user_message.lower() == 'no':
+        if user_message.lower() == 'नहीं' or user_message.lower()=='nhi' or user_message.lower()=='nahi':
             print("User said no, moving on")
             return []
 
@@ -364,11 +364,12 @@ class FEEDBACK1(Action):
                 print(row)
         language = tracker.get_slot("language")
         language = language.lower()
-        if language=='hindi':
-            th = "अपनी रेटिंग और सुझाव के लिए धन्यवाद!"
-            dispatcher.utter_message(text=th)
-        elif language=='english':
+        print("Language: ", language)
+        if language=='english':
             th = "Thank you for your rating and suggestions!"
+            dispatcher.utter_message(text=th)
+        elif language=='hindi':
+            th = "अपनी रेटिंग और सुझाव के लिए धन्यवाद!"
             dispatcher.utter_message(text=th)
 
         return []

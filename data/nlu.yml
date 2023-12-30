@@ -145,6 +145,9 @@ nlu:
 - intent: generate_text
   examples: |
     - no
+    - nahi
+    - nhi
+    - नहीं
     - What is the Namami Gange program?
     - What is the Namami Gange program all about?
     - What is the Namami Gange program about?
