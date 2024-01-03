@@ -142,12 +142,26 @@ nlu:
     - यह सबसे अच्छा है
     - मुझे यह पसंद आया
     - मेरी उम्मीदों से बेहतर
+
+- intent: continue_eng
+  examples: |
+    - cont
+    - continue
+    - please continue
+    - go on
+    - go ahead
+
+- intent: continue_hi
+  examples: |
+    - जारी रखें
+    - जारी रखो
+    - जारी करें
+    - आगे बढ़ें
+    - आगे बढ़ो
+
 - intent: generate_text
   examples: |
     - no
-    - nahi
-    - nhi
-    - नहीं
     - What is the Namami Gange program?
     - What is the Namami Gange program all about?
     - What is the Namami Gange program about?
@@ -234,6 +248,12 @@ nlu:
     - What is the Ganga Gram initiative?
     - Tell me about the Gram Panchayats on the bank of River Ganga.
     - Explain the construction of toilets and model villages.
+
+- intent: generate_text_hi
+  examples: |
+    - nahi
+    - nhi
+    - नहीं
     - नमामि गंगे क्या है?
     - क्या आप मुझे नमामि गंगे के बारे में बता सकते हैं?
     - नमामि गंगे की व्याख्या करें

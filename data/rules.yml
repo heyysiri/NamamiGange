@@ -49,6 +49,17 @@ rules:
   - action: utter_goodbye_hi
   - action: utter_ask_fb_hi
 
+- rule: continue for english
+  steps:
+  - action: utter_cont
+  - intent: generate_text
+  - action: action_gpt2_eng
+
+- rule: cnotinue for hindi
+  steps:
+  - action: utter_cont_hi
+  - intent: generate_text_hi
+  - action: action_gpt2_hi
 # - rule: deactivate loop after goodbye
 #   steps:
 #   - intent: text_fb

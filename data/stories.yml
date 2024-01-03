@@ -219,21 +219,25 @@ stories:
   - action: utter_cont
   - intent: generate_text
   - action: action_gpt2_eng
+  - intent: continue_eng
   - action: utter_river_surface_cleaning #3
   - action: utter_bio_diversity_conservation #4
   - action: utter_cont
   - intent: generate_text
   - action: action_gpt2_eng
+  - intent: continue_eng
   - action: utter_afforestation #5
   - action: utter_public_awareness #6
   - action: utter_cont
   - intent: generate_text
   - action: action_gpt2_eng
+  - intent: continue_eng
   - action: utter_industrial_effluent_monitoring #7
   - action: utter_ganga_gram #8
   - action: utter_cont
   - intent: generate_text
   - action: action_gpt2_eng
+  # - action: utter_say_goodbye_eng
 
 - story: user_selects_hindi
   steps:
@@ -253,20 +257,24 @@ stories:
   - action: utter_sewerage_treatment_capacity_hi
   - action: utter_river_front_development_hi
   - action: utter_cont_hi
-  - intent: generate_text
+  - intent: generate_text_hi
   - action: action_gpt2_hi
+  - intent: continue_hi
   - action: utter_river_surface_cleaning_hi
   - action: utter_bio_diversity_conservation_hi
   - action: utter_cont_hi
-  - intent: generate_text
+  - intent: generate_text_hi
   - action: action_gpt2_hi
+  - intent: continue_hi
   - action: utter_afforestation_hi
   - action: utter_public_awareness_hi
   - action: utter_cont_hi
-  - intent: generate_text
+  - intent: generate_text_hi
   - action: action_gpt2_hi
+  - intent: continue_hi
   - action: utter_industrial_effluent_monitoring_hi
   - action: utter_ganga_gram_hi
   - action: utter_cont_hi
-  - intent: generate_text
+  - intent: generate_text_hi
   - action: action_gpt2_hi
+  # - action: utter_say_goodbye_hi

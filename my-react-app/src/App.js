@@ -1,12 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./styles.css";
+import MyPopup from "./Popup";
+import QuizNo1 from "./Quiz1";
+import QuizNo2 from "./Quiz2";
 
 // const host = "localhost:5005"; // Change this to your desired localhost host
 
 function App() {
  const [messages, setMessages] = useState([]);
  const [inputText, setInputText] = useState("");
+ const messagesRef = useRef(null);
+ const [showPopup1, setShowPopup1] = useState(false);
+ const [showPopup2, setShowPopup2] = useState(false);
 
+
+ const handlePopupToggle1 = () => {
+   setShowPopup1(!showPopup1);
+ };
+ const handlePopupToggle2 = () => {
+  setShowPopup2(!showPopup2);
+};
+ const handleMessageFromRasa = (message) => {
+  if (message === "Type 'cont' to continue") {
+    // Show the popup when the trigger message is received
+    setShowPopup1(true);
+  } else if (message === "popup_triggered") {
+    // Show the popup when the trigger message is received
+    setShowPopup2(true);
+  }
+};
  const handleSendMessage = async () => {
   if (inputText.trim() !== "") {
     setMessages((prevMessages) => [
@@ -46,6 +68,12 @@ function App() {
           { text: response.text, sender: "bot" },
         ]);
         handleTextToSpeech(response.text);
+        handleMessageFromRasa(response.text);
+        if (response.text === "TriggerPopupAction") {
+          setShowPopup1(true);
+        } else if (response.text === "TriggerPopupActionForQuiz2") {
+          setShowPopup2(true); // Set showPopup2 for QuizNo2
+        }
       });
     } catch (error) {
       console.error('Error sending message to Rasa:', error);
@@ -57,7 +85,7 @@ function App() {
  const handleSpeechToText = () => {
     if (window.hasOwnProperty("webkitSpeechRecognition")) {
       const recognition = new window.webkitSpeechRecognition();
-      recognition.lang = "en-US";
+      recognition.lang = "hi-IN";
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
 
@@ -75,7 +103,16 @@ function App() {
     } else {
       alert("Your browser does not support speech recognition.");
     }
+    
  };
+ useEffect(() => {
+  if (messagesRef.current) {
+    messagesRef.current.scrollTo({
+      behavior: "smooth",
+      top: messagesRef.current.scrollHeight,
+    });
+  }
+}, [messages]);
 
  return (
     <div className="app">
@@ -95,10 +132,22 @@ function App() {
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
           />
-          <button onClick={handleSendMessage} className="button1">{" "}</button>
-          <button onClick={handleSpeechToText} className="button2">{" "}</button>
+          <button onClick={handleSendMessage} className="button1"></button>
+          <button onClick={handleSpeechToText} className="button2"></button>
+          <button onClick={handlePopupToggle1} className="button3"></button>
+          <button onClick={handlePopupToggle2} className="button3"></button>
         </div>
       </div>
+      {showPopup1 && (
+        <MyPopup onClose={() => setShowPopup1(false)}>
+          <QuizNo1 onClose={() => setShowPopup1(false)} />
+        </MyPopup>
+      )}
+      {showPopup2 && (
+        <MyPopup onClose={() => setShowPopup2(false)}>
+          <QuizNo2 onClose={() => setShowPopup2(false)} />
+        </MyPopup>
+      )}
     </div>
  );
 }
