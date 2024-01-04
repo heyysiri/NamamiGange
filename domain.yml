@@ -35,7 +35,8 @@ slots:
     - type: from_entity
       entity: rating
 actions:
-- select_language_actions
+- select_language_actions_eng
+- select_language_actions_hi
 - action_weather_eng
 - action_weather_hi
 - utter_select_language
@@ -158,5 +159,5 @@ responses:
   - text: |
       कृपया पूछें जो भी प्रश्न हो सकते हैं। जारी रखने के लिए 'नहीं' दर्ज करें।
 session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+  session_expiration_time: 30
+  carry_over_slots_to_new_session: false

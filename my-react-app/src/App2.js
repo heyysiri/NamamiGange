@@ -1,47 +1,50 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles.css";
 import MyPopup from "./Popup";
-import QuizNo1 from "./Quiz1";
+// import QuizNo1 from "./Quiz1";
 import QuizNo2 from "./Quiz2";
 
 // const host = "localhost:5005"; // Change this to your desired localhost host
 
-function App() {
+function App2() {
  const [messages, setMessages] = useState([]);
  const [inputText, setInputText] = useState("");
  const messagesRef = useRef(null);
- const [showPopup1, setShowPopup1] = useState(false);
  const [showPopup2, setShowPopup2] = useState(false);
+ const [reloadPage, setReloadPage] = useState(false);
 
 
- const handlePopupToggle1 = () => {
-   setShowPopup1(!showPopup1);
- };
+ 
  const handlePopupToggle2 = () => {
   setShowPopup2(!showPopup2);
 };
  const handleMessageFromRasa = (message) => {
-  if (message === "Type 'cont' to continue") {
-    // Show the popup when the trigger message is received
-    setShowPopup1(true);
-  } else if (message === "popup_triggered") {
+  if (message === "popup_triggered") {
     // Show the popup when the trigger message is received
     setShowPopup2(true);
   }
+  else if(message==="अपनी रेटिंग और सुझाव के लिए धन्यवाद!"){
+    setReloadPage(true);
+  }
 };
+useEffect(() => {
+    if (reloadPage) {
+      // Reload the page when reloadPage state changes
+      window.location.reload(true);
+    }
+  }, [reloadPage]);
  const handleSendMessage = async () => {
   if (inputText.trim() !== "") {
     setMessages((prevMessages) => [
       ...prevMessages,
       { text: inputText, sender: "user" },
     ]);
-
     setInputText("");
     const handleTextToSpeech = (text) => {
       if ('speechSynthesis' in window) {
         const speech = new SpeechSynthesisUtterance();
         speech.text = text;
-        speech.lang = 'en-US'; // Change according to your language
+        speech.lang = 'hi-IN'; // Change according to your language
         speech.pitch = 0.6; // Change the pitch (example value)
         speech.rate = 1.0; // Change the rate (example value)
         speech.volume = 1.0;
@@ -69,9 +72,7 @@ function App() {
         ]);
         handleTextToSpeech(response.text);
         handleMessageFromRasa(response.text);
-        if (response.text === "TriggerPopupAction") {
-          setShowPopup1(true);
-        } else if (response.text === "TriggerPopupActionForQuiz2") {
+        if (response.text === "TriggerPopupActionForQuiz2") {
           setShowPopup2(true); // Set showPopup2 for QuizNo2
         }
       });
@@ -110,7 +111,7 @@ function App() {
     messagesRef.current.scrollTo({
       behavior: "smooth",
       top: messagesRef.current.scrollHeight,
-    });
+    })
   }
 }, [messages]);
 
@@ -134,15 +135,9 @@ function App() {
           />
           <button onClick={handleSendMessage} className="button1"></button>
           <button onClick={handleSpeechToText} className="button2"></button>
-          <button onClick={handlePopupToggle1} className="button3"></button>
           <button onClick={handlePopupToggle2} className="button3"></button>
         </div>
       </div>
-      {showPopup1 && (
-        <MyPopup onClose={() => setShowPopup1(false)}>
-          <QuizNo1 onClose={() => setShowPopup1(false)} />
-        </MyPopup>
-      )}
       {showPopup2 && (
         <MyPopup onClose={() => setShowPopup2(false)}>
           <QuizNo2 onClose={() => setShowPopup2(false)} />
@@ -152,4 +147,4 @@ function App() {
  );
 }
 
-export default App;
+export default App2;

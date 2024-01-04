@@ -7,22 +7,40 @@ import random
 import requests
 import sqlite3
 import asyncio
-class SelectLanguageAction(Action):
+class SelectLanguageAction1(Action):
     def name(self) -> Text:
-        return "select_language_actions"
+        return "select_language_actions_eng"
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print("Got into language action")
+        print("Got into language action_eng")
         language = tracker.get_slot("language")
         language = language.lower()
+        
         print("selected language is ", language)
         if language:
             if language == "english":
-                dispatcher.utter_message(response="utter_greet")
+                dispatcher.utter_message("english")
+                # dispatcher.utter_message(response="utter_greet")
                 # dispatcher.utter_message(response="utter_mood")
                 return []
-            elif language=="hindi":
-                dispatcher.utter_message(response="utter_greet_hi")
+            
+        else:
+            dispatcher.utter_message(text="Please select a language first.")
+            return []
+class SelectLanguageAction2(Action):
+    def name(self) -> Text:
+        return "select_language_actions_hi"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print("Got into language action_hi")
+        language = tracker.get_slot("language")
+        language = language.lower()
+        
+        print("selected language is ", language)
+        if language:
+            if language=="hindi":
+                dispatcher.utter_message("hindi")
+                # dispatcher.utter_message(response="utter_greet_hi")
                 # dispatcher.utter_message(response="utter_mood_hi")
                 return []
             
