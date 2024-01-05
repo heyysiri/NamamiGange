@@ -141,7 +141,7 @@ const QuizNo2 = (props) => {
 
     if (selectedOption === correctAnswer) { 
       setIsCorrectAnswer(true);
-      setCorrectAnswer("Correct answer!");
+      setCorrectAnswer("सही जवाब!");
       setOptionSelected(true);
       setTimeout(() => {
       setIsCorrectAnswer(false);
@@ -163,7 +163,7 @@ const QuizNo2 = (props) => {
       
     } else { 
       setOptionSelected(true);
-      setIncorrect(`Incorrect answer. Correct answer: ${questions[currentQuestion]?.answer}`);
+      setIncorrect(`गलत जवाब| सही जवाब: ${questions[currentQuestion]?.answer}`);
       setTimeout(() => {
         setCurrentQuestion((currentQuestion) => {
           const nextQuestion = currentQuestion + 1;
