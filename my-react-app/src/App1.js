@@ -12,6 +12,21 @@ function App1() {
  const messagesRef = useRef(null);
  const [showPopup1, setShowPopup1] = useState(false);
  const [reloadPage, setReloadPage] = useState(false);
+ const [synthesis, setSynthesis] = useState(null);
+
+  useEffect(() => {
+    if (!window.speechSynthesis) {
+      alert("Your browser does not support Text-to-Speech.");
+    } else {
+      setSynthesis(window.speechSynthesis);
+    }
+
+    return () => {
+      if (synthesis) {
+        synthesis.cancel();
+      }
+    };
+  }, [synthesis]);
 
 
  const handlePopupToggle1 = () => {
@@ -33,6 +48,7 @@ useEffect(() => {
     window.location.reload(true);
   }
 }, [reloadPage]);
+
 const handleSendMessage = async () => {
   if (inputText.trim() !== "") {
     setMessages((prevMessages) => [
@@ -43,18 +59,19 @@ const handleSendMessage = async () => {
     setInputText("");
     
     const handleTextToSpeech = (text) => {
-      if ('speechSynthesis' in window) {
+      if (synthesis && synthesis.speak) {
         const speech = new SpeechSynthesisUtterance();
         speech.text = text;
         speech.lang = "en-US"; // Change according to your language
         speech.pitch = 0.6; // Change the pitch (example value)
         speech.rate = 1.0; // Change the rate (example value)
         speech.volume = 1.0;
-        window.speechSynthesis.speak(speech);
+        synthesis.speak(speech);
       } else {
         alert('Your browser does not support Text-to-Speech.');
       }
     };
+    
     
     try {
       const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {

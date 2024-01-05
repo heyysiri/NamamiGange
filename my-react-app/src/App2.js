@@ -12,6 +12,21 @@ function App2() {
  const messagesRef = useRef(null);
  const [showPopup2, setShowPopup2] = useState(false);
  const [reloadPage, setReloadPage] = useState(false);
+ const [synthesis, setSynthesis] = useState(null);
+
+  useEffect(() => {
+    if (!window.speechSynthesis) {
+      alert("Your browser does not support Text-to-Speech.");
+    } else {
+      setSynthesis(window.speechSynthesis);
+    }
+
+    return () => {
+      if (synthesis) {
+        synthesis.cancel();
+      }
+    };
+  }, [synthesis]);
 
 
  
@@ -41,14 +56,14 @@ useEffect(() => {
     ]);
     setInputText("");
     const handleTextToSpeech = (text) => {
-      if ('speechSynthesis' in window) {
+      if (synthesis && synthesis.speak) {
         const speech = new SpeechSynthesisUtterance();
         speech.text = text;
-        speech.lang = 'hi-IN'; // Change according to your language
+        speech.lang = "hi-IN"; // Change according to your language
         speech.pitch = 0.6; // Change the pitch (example value)
         speech.rate = 1.0; // Change the rate (example value)
         speech.volume = 1.0;
-        window.speechSynthesis.speak(speech);
+        synthesis.speak(speech);
       } else {
         alert('Your browser does not support Text-to-Speech.');
       }
