@@ -68,15 +68,20 @@ body {
   .correct-answer {
     background-color: #4caf50; /* Green background for correct answer */
     color: white;
-    background-image: url(whistle_no_bg.gif);
   }
   
   /* Styles for incorrect answer */
   .incorrect-answer {
     background-color: #f44336; /* Red background for incorrect answer */
-    color: red;
+    color: black;
   }
   .answer-result {
     opacity: 1;
     transition: opacity 1s ease-in-out; /* Transition effect for opacity */
+  }
+
+  .correct-answer-gif {
+    position: static;
+    height: 100px;
+    width: 180px;
   }
