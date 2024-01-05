@@ -1,0 +1,35 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+body{  
+  background-color: white;
+  font-family:arial;
+  color:white;
+}
+a{color:orange;}
+.character {
+  background: url(https://bg-so-1.zippyimage.com/2023/12/28/2725c1ee59c65f6c5404376616c79426.png);
+  zoom:  1;
+  width: 640px;  height:360px; 
+  position:absolute;
+  left:10%;top:20%;  transform: translate(-50%,-10%);
+}
+
+
+
+#textS{ 
+  color:#000;
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  font-family:'Oswald', tahoma; font-size:40vw;
+  text-align:center; white-space: nowrap;
+  color:#111;
+  opacity:0.2;
+}
+#logo {
+  border-radius: 50%; 
+  position:absolute;
+  z-index:5000;
+  top:20px; right:20px;
+}
+
+#DiacoDesignLink,#pens{
+  color: #fff;
+}
