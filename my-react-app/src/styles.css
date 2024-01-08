@@ -8,17 +8,75 @@ body {
 
 .app {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: flex-end;
   height: 100vh;
+  /* background-color: lightblue; */
+}
+.app1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100vh;
+  /* background-color: lightblue; */
+}
+.app2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100vh;
+  /* background-color: lightblue; */
+}
+
+
+.hello-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex: 1;
+}
+.talking-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex: 1;
+}
+.nodding-animation{
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex: 1;
+  
 }
 
 .chat-room {
   border: 1px white;
-  width: 830px;
-  height: 500px;
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-y:scroll;
+  transition: overflow-y 0.3s ease;
+  /* justify-content: flex-end; /* Ensure the content aligns to the bottom */
+  /* align-items: flex-end; */ 
+}
+
+@media screen and (max-width: 600px) {
+  .chat-room {
+    width: 100%;
+    height: 100vh;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .chat-room {
+    width: 830px;
+    height: 500px;
+  }
 }
 
 .messages {
@@ -27,6 +85,27 @@ body {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 600px) {
+  .messages {
+    width: 30%;
+    display: flex;
+    flex-direction: flex-end;
+    flex-direction: column;
+  }
+}
+
+
+.chat-overlay {
+  position: fixed;
+  top: 2%;
+  bottom: 1%;
+  left: 36%;
+  width: 970px;
+  height: 700px;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+  z-index: 99; /* Ensure the overlay is above the chatroom */
 }
 
 .user,
@@ -51,12 +130,12 @@ body {
 }
 
 .chat-room::-webkit-scrollbar-thumb {
-  background-color: #888;
+  background-color: blue;
   border-radius: 4px;
 }
 
 .chat-room::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
+  background-color:blue;
 }
 
 /*.chat-bubble {
@@ -84,6 +163,14 @@ body {
   overflow-wrap: anywhere;
 }*/
 
+.messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
 .chat-bubble {
   display: flex;
   background-color: lightsalmon;
@@ -151,91 +238,13 @@ body {
     -5px 25px 0 -10px lightsalmon;
 }
 
-/*.chat-bubble {
-  margin: 20px;
-  display: inline-block;
-  padding: 7px;
-  position: relative;
-  width: auto;
-  height: auto;
-  background-color: yellow;
-  overflow-wrap: anywhere;
-}
-/* .border{
-  border: 5px solid #666;
-}*/
+
 .round {
   border-radius: 30px;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
 }
-/* .bot .chat-bubble:before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-	left: 12%;
-  right: auto;
-  top: auto;
-	bottom: -30px;
-	border: 14px solid;
-	border-color: #666 transparent transparent #666;
-} */
-/*.bot .chat-bubble:after {
-  content: " ";
-  position: absolute;
-  width: 0;
-  height: 0;
-  left: 14%;
-  right: auto;
-  top: auto;
-  bottom: -20px;
-  border: 12px solid;
-  border-color: yellow transparent transparent yellow;
-}*/
 
-/*.user .chat-bubble:before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: auto;
-	right: 12%;
-	bottom: -25px;
-	border: 12px solid;
-	border-color: #666 #666 transparent transparent;
-}*/
-/*.user .chat-bubble:after {
-  content: " ";
-  position: absolute;
-  width: 0;
-  height: 0;
-  left: auto;
-  right: 14%;
-  bottom: -16px;
-  border: 10px solid;
-  border-color: yellow yellow transparent transparent;
-}*/
-
-/*.user .chat-bubble {
-  background-color: lightseagreen;
-  border-radius: 30px 30px 5px 30px;
-  color: #fff;
-  float: right;
-  display: flex;
-}
-
-.bot .chat-bubble {
-  background-color: lightcoral;
-  border-radius: 30px 30px 30px 5px;
-  color: #fff;
-  /*float: left;*/
-
-/*.chat-bubble:after {
-  content: "";
-  display: block;
-  clear: both;
-}*/
 .input-container {
   display: flex;
   padding: 25px;
@@ -277,12 +286,12 @@ input {
 .language-buttons{
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items:center;
   height: 100vh;
-  margin-right: 400px;
+  margin-right: 500px;
 }
 .button1 {
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAclBMVEX///8AAADIyMinp6eDg4Pj4+P39/eqqqo6OjrHx8fn5+fLy8thYWHy8vKGhob8/PxbW1tWVlYVFRUpKSkPDw80NDTu7u51dXXe3t4iIiKamppMTExpaWktLS3S0tK5ublBQUGRkZF6enpQUFBwcHCysrKDAYwOAAAEwElEQVR4nO2diXbiMAxFqwECoWxt2SlbW/7/FyeZZmaABnASyZLf8f0C34NsbEtWnp4ikUgkEolEIpFIJBLJmKTaI5CGaNYaaw9CFMppd7SHIQh9M/ilPRAx6C+9VqI9FhnojHZfezQS0AWTZ+3x8ENX9FpD7SExc21I9Aq2sv40zHhBCtZSQ6ItTrDeMCSajpbaY+PhpiFMsN4zJFoBbAPuG2YEH6wPDbNtQNh7VgfDfGUN+IDlZJgHa7DbAFfDcA9Y7ob5njXEYK1imAdreAesioYBBmtlQ6JDWNuAGoYU1m1APcNszxpMsNY1zFbWbhgHrPqGodwGNDGkIIK1oSHRm/VgbWxINLUdrAyGGZYzWDyG2arTtboN4DIksxksRsNsz2oxWFkN85XV3AGL2ZDs7Vn5Da0Fq4Qh0czQyipjSIaCVczQzG2AoKGRA5aoYb5nVQ9WYUPSz2DJG2rXBvgwzG8D9DJYfgxJMVi9GWZ7Vp17Vo+GpJNu9WuoUXXl2zCvDfB7wPJvSJ7TrSqGXvesSoZ58TW6IfkKVk3DLFg9rKy6hj6Kr7UNSbw2QFvvD6LbAG25AsEDlrbaP8RuA7TFzpE5YGlbXTITuLrSdrqGP92qbVQCc22Atk4pK85g1Za5Bd+eVdvkNly1Adoe9+BJt2pbPIAhWLUVHtI43aot4MCsWbBqD9+NJntW7bG7Uv/qSnvk7vRq1gZoj7sStYK1k+6Pg8Ob9thdqX0bkPSX6fpj0NMWcKBZbcB4OH/uHr+Mi7IUXye7fetjs9J2uQnbbUCyfD6NBhuLs3TLehuQzdJ9Nktn2laXCNQGjJN8lr5vtdX+I3bPms/SxWb7qi1I0sXXw+XuNHr/1J6l8rUBybyzX7cniguvt3TrPO2ulWap3+Lr+S5tLT57vmep/6fY8+WuO/r69Bi8SvWsyTD7Lx29+PlFdRuz9dPTcTATN9WvZ+3v0vVichA09VEb4MC8k83SxWYq4mipMds4We5b7Q27o4Hi62s6v7ivGmw2Zhvns5TtqsHES4FyxsP+rntcHBo72n+KnZwGTdeio7ZDKcC/IfI8hF1Lgf8Pgfc0wPtS2LMF8PkQ+IwPfE8De9cGfF8KfOcNm7cAzj0B5w+Bc8CweXzgWgzkehr8mijtIVei1tFIe9DuoNcmoteXgtcIo9d5o9fqg7+3QH8zg/7uCfztGvr7Q/A3pOjvgNHfcoO/x0fvqYDeFwO9twl4fxr0HkPofaLAe32h92tD77kH3jcRvfclev9S8B606H2EwXtBo/fzRu/JDt5X30A5sqifiWp5QT/0b5Toh2eBjB76t4LQv/dkJjwLmPXQv7tmKzwLGP3MPYX7hksP/RuW4N8hRf+WLPr3gMG/6WzvIXEZ9f1MHI0cqOsXQHgW1POztve8Rw29g6HmKA5U9jNycnenop9wzl2CKno91UZTdQEOzwLn8Azhz70UJ71tkOFZ4OA3CTQ8Cx6Hp17WiIf7equw/txLueennTXi4abeNPjwLLjht1VNarICHJ4FP/XCOLm7c+2nm3OX4NLPSAswVs79Qjq5u3MWnuH/uZdS+IV6NHLgOzyxVs9LtFtEy2M5axSJRCKRSCQSiUQikQgbvwHeNXMASbPgMwAAAABJRU5ErkJggg==);
+  background-image: url(images/send-message.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -294,7 +303,7 @@ input {
   margin-right: 2px;
 }
 .button1:hover {
-  background-color: rgb(119, 114, 114);
+  background-color: lightblue;
   box-shadow:
     0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
@@ -302,19 +311,19 @@ input {
 }
 
 .button2 {
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAclBMVEX///8AAAD8/PwEBARJSUnw8PBycnI+Pj7s7Oz5+fk5OTny8vIzMzO7u7ufn59QUFC0tLTa2trh4eHOzs6SkpKurq4qKipZWVnn5+eDg4MSEhKhoaGOjo58fHwfHx9fX1/ExMRqamrU1NQZGRl+fn4tLS25vvMcAAAGpUlEQVR4nO2diXKjOhBFhfACcSDGBm94wXHy/7/41FrYbBzwVD0k1z01k0kMdvVNSy2pUWsYAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwPvB+bMfnUfLWUyz60wQ75jS+D4ySU0YHT88w2w5FS+H76OQ8eS0KeV5vvh7nq0Xb+TD1alUVmO7HNuuf4UTwk+L1HuAlBvRde6uL4XpIWPJ1yOBWuRM9Edxk6uhVXqw8Nut08iTFz6/XfahiJZsKXQ8VKhE+t65cFcgNdFvr1MgvS6vJe6OG5wlh64+WOPwPbahL8PZtodAMWy42hM5y3sJ9Lx4bFNfJTg8DqMtRMDZuelDlvYSSBKPY5s6GFo38OCze6BoKdys3FtQCXMj724q2iHQ8zLXllJy7XfpJ1A6+ou5tlyk+N9ToPKicwKFtYlpgb0kfrvXEXsPhop8bHMHQt44DlK4H9vkgVCvmg1SOHOujbLFZZDCi2PLC+GQRefS/iFb9/JS08kghV+LsQ0eDBRCof1AYYvJdGyDBwOFUGg/UHin0LVJGxS2mQdjGzwYKHyg0LF2Ch9Cof1AIRTaDxRCof1AIRTaDxRCof1AIRTaDxRCof1AYYvJ+yvEkxnL4PDhOygcuOvr/RW6t9uED1ZoeaSpzFP7RDlbvLZjiMrBqo+xCFUtuov3WajrCV9ppfQpYbbPdxY+SpQWLalSTUxOuKzd7lfVZdhKH3IekOtvhX1ll2RQQKUTvndResPrIIUX6UNmijRCbptEsiYn23zvkKhONGyf95XLT1npgsWlhT2RsZNXWkfGHnsXlKjaLtXQ9QtWbt3nRmHGpE+z/jUz4sZcvckUaZzsc6Awb6+ty9WPyQCBsmaGMKX7NiqsSkhMMWFffdLX+j2mHVjYSnn1+58xFTWGhJqJ6ob8oh1vZ8nlUls319OStde//jBSbwk3njqLILZy/9DaCNITsAHztg+dw5gazdF4MrqgKhljr6mvz3pXWKb6HYVRuLLQgwJzvIC2l4eTnuH0ZpZOe0+3g9E0PEOVxZJ9F/NC1EufX9bjh1+e6oZzG3shk2O81HhT8zbx96ROv3jSQOn61pxlo2KT71tbb/l90D7JVSRUK4WO01v0rULOJlGrEV4VZa7HltKBaGRKzoEOK5E2r/4YMMiFaxZqH5qbJ9amNFLTKCPd7kK2vj07dkBc8qNyLZgbf9s53hPKY9SzyIecfFONkh0UapnEVd5D/TZWYwvpgvOrsXtpgqFoqHOj8UGPnKz0jeJrbPrm1dJI2hgePkzRq/DNbla6saZQfrsPyoUu353NJQsnNAbO58ZKszgIKYJkn9qFpS/lN9e1CqLyraz0/8RWD5anfbQcQfnBMJ7XWqn8url+676qqA4oKEYxvie8yrD97sxrsiFOi0bubZvJaFK6kE6U0h6+WpigMZC9q/IQr/Nd/XmSpT+n0z5dJndvm2oPiz+BfZnECmpzez1i+N6lWSRST4s3FFAwmpSdM9VOtxJ5BCLlun11oN5X0HYGb/2rfwjm2oO+PFvBXh/KmRelPH3tkHlj6Ob1b+oakl8dfkTTDpjNZ/GohxeU8/R1yNwUzRvYI+Ojs1lkqOne/2PsP8Dl5MRMRn928oDIO7PLmUzwUwuxThwXRU31WDst8SMK1bmIdwcHk3AezWsCY3tjTA3ZGWf1CdpkyVnjIFauD/5krDZI+jQP4o4oVGtZPX8hZ36kCU1deDOW7rKJvq4ExsLVoROtVCox6WETQi7pOqzfFmT67OTS17EJxk4gfLG8eW1u232+jKJlvr9/PvxbuBBkKmhyk3x65cDYha9nB95kF7Lw78+1B9nYFsdyIK8pUk23asPytVz0v9CZFiqRy0KWbI2PGjq9luJr8njMtBmu435YHB5oa/p0I1OH7sSYO4pLpcb37r6/2poa7Y0IIEm6abbTst1u0oS7FWAeoNreOr+UeaYyi5GT+1wY4v9E5UMXuyg1Km9pEYQ6S+q8woYEM8v+1FeYzavdl/ioK3xLoNB9oNB9oNB9oNB93k0hbWenB05xnKbHNI3j2MxLz7HmmGaJY0vfFpz93Cekmiviw9HmBxXPocxE7JUPtf1aPsNkSeUVix/b/029gK22xvdreWDfuzp2WHmD+q6vxg63yoe+LJB1U6NOfftPM6b0rNj2oq5uOAtpW/OzXV/lFrGxbX2d1aZTnibW2/wcRKVAE/lfj3ZyLdwVyLqeat/d5XA2GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC3+A3EaQpHu/tdHAAAAAElFTkSuQmCC);
+  background-image: url(images/microphone.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 40px;
   height: 30px;
-  border: 1px solid white;
-  color: white;
+  border: 1px lightblue;
+  background-color: lightblue;
   cursor: pointer;
   margin-left: 4px;
 }
 .button2:hover {
-  background-color: rgb(116, 111, 111);
+  background-color: lightblue;
   box-shadow:
     0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);

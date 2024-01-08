@@ -7,105 +7,12 @@ import random
 import requests
 import sqlite3
 import asyncio
-class SelectLanguageAction1(Action):
-    def name(self) -> Text:
-        return "select_language_actions_eng"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print("Got into language action_eng")
-        language = tracker.get_slot("language")
-        language = language.lower()
-        
-        print("selected language is ", language)
-        if language:
-            if language == "english":
-                dispatcher.utter_message("english")
-                # dispatcher.utter_message(response="utter_greet")
-                # dispatcher.utter_message(response="utter_mood")
-                return []
-            
-        else:
-            dispatcher.utter_message(text="Please select a language first.")
-            return []
-class SelectLanguageAction2(Action):
-    def name(self) -> Text:
-        return "select_language_actions_hi"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print("Got into language action_hi")
-        language = tracker.get_slot("language")
-        language = language.lower()
-        
-        print("selected language is ", language)
-        if language:
-            if language=="hindi":
-                dispatcher.utter_message("hindi")
-                # dispatcher.utter_message(response="utter_greet_hi")
-                # dispatcher.utter_message(response="utter_mood_hi")
-                return []
-            
-        else:
-            dispatcher.utter_message(text="Please select a language first.")
-            return []
 
 class GPT3ChatCompletionAction(Action):
 
     def name(self):
         return "action_gpt2_eng"
 
-    # def run(self, dispatcher, tracker, domain):
-    #     print("Got into action_gpt2_eng")
-    #     user_message = tracker.latest_message.get('text')
-    #     language = tracker.get_slot("language")
-    #     language = language.lower()
-    #     if user_message.lower() == 'no':
-    #         print("User said no, moving on...")
-    #         return []
-
-    #     # provider = You()
-    #     # response = g4f.ChatCompletion.create(
-    #     #     model="gpt-3.5-turbo",
-    #     #     provider=provider,
-    #     #     messages=[{"role": "user", "content": f"This is about Namami Gange. Answer directly to the question creatively in 1 sentence, make it VERY educative: " + user_message}],
-    #     #     stream=True,
-    #     # )
-    #     _providers = [
-    #     g4f.Provider.You,
-    #     ]
-
-    #     async def run_provider(provider: g4f.Provider.BaseProvider):
-    #         try:
-    #             response = await g4f.ChatCompletion.create_async(
-    #                 model=g4f.models.default,
-    #                 messages=[{"role": "user", "content": "Explain the Namami Gange Program in 1 short sentence in cha-cha choudhary mannerism creatively."}],
-    #                 provider=provider,
-    #             )
-    #             # print(f"{provider.__name__}:", response)
-    #             dispatcher.utter_message(text=str(response))
-    #         except Exception as e:
-    #             dispatcher.utter_message(text=f"Failed to fetch response from {provider.__name__}: {e}") 
-            
-    #     async def run_all():
-    #         calls = [
-    #             run_provider(provider) for provider in _providers
-    #         ]
-    #         await asyncio.gather(*calls)
-
-    #     asyncio.run(run_all())
-    #     txt = ""
-    #     # for message in response:
-    #     #     message_dict = {"text": message}
-    #     #     txt += message_dict["text"] + ""
-    #     # text = txt.strip()
-    #     # text=txt.strip("*")
-    #     # text=txt.strip('**')
-
-        
-
-    #     # selected_line_eng = random.choice(chacha_lines_eng)
-    #     # prefix_eng = random.choice(chacha_prefix_eng)
-    #     # if language=='english':
-    #     #     dispatcher.utter_message(text=prefix_eng + text+ " "+ selected_line_eng)
     async def run_provider(self, provider: g4f.Provider.BaseProvider, dispatcher: CollectingDispatcher, tracker: Tracker, chacha_lines_eng: List[str], chacha_prefix_eng: List[str]):
         user_message = tracker.latest_message.get('text')
         try:
@@ -119,7 +26,6 @@ class GPT3ChatCompletionAction(Action):
             prefix_eng = random.choice(chacha_prefix_eng)
             response = prefix_eng + " " + response + " " + selected_line_eng
             dispatcher.utter_message(text=str(response))
-            dispatcher.utter_message("Type 'cont' to continue") #newly added
         except Exception as e:
             dispatcher.utter_message(text=f"Failed to fetch response from {provider.__name__}: {e}")
 
@@ -136,7 +42,6 @@ class GPT3ChatCompletionAction(Action):
 
         _providers = [
             g4f.Provider.You,
-            # Add other providers if necessary
         ]
         chacha_lines_eng = [
             "Chacha Chaudhary's brain works faster than a computer!",
@@ -171,21 +76,6 @@ class GPT3ChatCompletionAction(Action):
 
         await asyncio.gather(*[self.run_provider(provider, dispatcher, tracker, chacha_lines_eng, chacha_prefix_eng) for provider in _providers])
 
-        # chacha_lines_eng = [
-        #     # List of chacha lines
-        # ]
-        # chacha_prefix_eng = [
-        #     # List of chacha prefixes
-        # ]
-
-        # # Randomly select and send Chacha Chaudhary style response
-        # selected_line_eng = random.choice(chacha_lines_eng)
-        # prefix_eng = random.choice(chacha_prefix_eng)
-        
-        # if language == 'english':
-        #     dispatcher.utter_message(text=f"{prefix_eng} {selected_line_eng}")
-
-        # return []
         return []
 
 class GPT3ChatCompletionActionHindi(Action):
@@ -206,7 +96,6 @@ class GPT3ChatCompletionActionHindi(Action):
             prefix_eng = random.choice(chacha_prefix_hi)
             response = prefix_eng + " " + response + " " + selected_line_eng
             dispatcher.utter_message(text=str(response))
-            dispatcher.utter_message("popup_triggered") #newly added
         except Exception as e:
             dispatcher.utter_message(text=f"Failed to fetch response from {provider.__name__}: {e}")
 
@@ -252,61 +141,6 @@ class GPT3ChatCompletionActionHindi(Action):
         ]
 
         await asyncio.gather(*[self.run_provider(provider, dispatcher, tracker, chacha_lines_hi, chacha_prefix_hi) for provider in _providers])
-
-    # def run(self, dispatcher, tracker, domain):
-    #     print("Got into action_gpt2_hi")
-    #     user_message = tracker.latest_message.get('text')
-    #     language = tracker.get_slot("language")
-    #     language = language.lower()
-    #     if user_message.lower() == 'नहीं' or user_message.lower()=='nhi' or user_message.lower()=='nahi':
-    #         print("User said no, moving on")
-    #         return []
-
-    #     provider = You()
-    #     response = g4f.ChatCompletion.create(
-    #         model="gpt-3.5-turbo",
-    #         provider=provider,
-    #         messages=[{"role": "user", "content": f"This is about Namami Gange. Answer directly to the question in 1 sentence, make it VERY educative. Answer creatively in hindi. DON'T provide translation or any other notes: " + user_message}],
-    #         stream=True,
-    #     )
-    #     txt = ""
-    #     for message in response:
-    #         message_dict = {"text": message}
-    #         txt += message_dict["text"] + ""
-    #     text = txt.strip()
-    #     text=txt.strip("*")
-    #     text=txt.strip('**')
-
-    #     chacha_lines_hi = [
-    #         "चाचा चौधरी का दिमाग कंप्यूटर से भी तेज चलता है।",
-    #         "चाचा चौधरी हर मुश्किल को आसान कर देते हैं।",
-    #         "दुनिया के हर बड़े काम को करने का राज है, टीमवर्क।",
-    #         "चाचा चौधरी हमेशा एक कदम आगे सोचते हैं।",
-    #         "जब चाचा चौधरी बोलते हैं, तो समझ जाते हैं सब।",
-    #         "बिल्कुल याद रखिएगा, चाचा चौधरी हमेशा सही फैसले करते हैं।",
-    #         "किसी भी समस्या का समाधान होता है, अगर इंसान में इरादा हो।",
-    #         "चाचा चौधरी के दिमाग में चलता है स्ट्रेटेजी का खेल।",
-    #         "हिम्मत वह होती है जो किसी मुश्किल को हार ना माने।",
-    #         "दिमाग से तेज है, दिल से भी तेज है। चाचा चौधरी, सबका बड़ा आदमी।",
-    #         "हर मुश्किल का हल होता है, बस थोड़ा पेशेंस चाहिए।",
-    #         "चाचा चौधरी, कभी भी हार नहीं मानते।",
-    #         "जब भी कोई समस्या आती है, चाचा चौधरी उसका समाधान ले कर आते हैं।"
-
-    #     ]
-    #     chacha_prefix_hi = [
-    #         "ओह, मेरे प्यारे दोस्त, ",
-    #         "अच्छा, मेरे दोस्त, ",
-    #         "ओह, मेरे दोस्त, ",
-    #         "ओह, मेरे प्यारे, ",
-    #         "बच्चों, ",
-    #         "अच्छा, मेरे प्यारे बच्चों, ",
-
-    #     ]
-    #     selected_line_hi = random.choice(chacha_lines_hi)
-    #     prefix_hi = random.choice(chacha_prefix_hi)
-    #     if language=='hindi':
-    #         dispatcher.utter_message(text=prefix_hi + text+ " "+ selected_line_hi)
-        
 
         return []
 
@@ -363,10 +197,6 @@ class ActionWeatherEnglish(Action):
         if language=='english':
             dispatcher.utter_message(text=aqi_eng[air_quality_index] + " And " + temp_eng.lower())
             dispatcher.utter_message(response='utter_intro')
-            # dispatcher.utter_message(response='utter_pillars_of_namami_gange')
-            # dispatcher.utter_message(response='utter_sewerage_treatment_capacity')
-            # dispatcher.utter_message(response='utter_river_front_development')
-            # dispatcher.utter_message(response='utter_cont')
 
         return []
 
@@ -423,11 +253,7 @@ class ActionWeatherHindi(Action):
         if language=='hindi':
             dispatcher.utter_message(text=aqi_hi[air_quality_index] + " " + temp_hi.lower())
             dispatcher.utter_message(response='utter_intro_hi')
-            # dispatcher.utter_message(response='utter_pillars_of_namami_gange_hi')
-            # dispatcher.utter_message(response='utter_sewerage_treatment_capacity_hi')
-            # dispatcher.utter_message(response='utter_river_front_development_hi')
-            # dispatcher.utter_message(response='utter_cont_hi')
-
+    
         return []
 class FEEDBACK1(Action):
     def name(self):

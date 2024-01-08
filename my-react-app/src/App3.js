@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 import "./styles.css";
+import HelloAnimation from "./hello";
 
 function App3({ handleMessageFromApp3 }) {
-    const handleLanguageSelection = (language) => {
-        handleMessageFromApp3(language.toLowerCase());
-    };
+const [showHelloAnimation, setShowHelloAnimation] = useState(true);
 
-    return (
-        <div className="app">
-            <div className="language-buttons">
-                <button className = "eng" onClick={() => handleLanguageSelection("english")}>English</button>
-                <button className = "hi" onClick={() => handleLanguageSelection("hindi")}>Hindi</button>
-            </div>
-        </div>
-    );
+  const handleLanguageSelection = (language) => {
+    handleMessageFromApp3(language); // Navigate to the respective language page
+    setShowHelloAnimation(false); // Hide HelloAnimation when a language is selected
+  };
+
+  return (
+    <div className="app">
+        <div className="hello-animation">
+      {showHelloAnimation && <HelloAnimation />} 
+      </div>
+      <div className="language-buttons">
+        <button className="eng" onClick={() => handleLanguageSelection("English")}>English</button>
+        <button className="hi" onClick={() => handleLanguageSelection("Hindi")}>Hindi</button>
+      </div>
+    </div>
+    
+  );
 }
 
 export default App3;

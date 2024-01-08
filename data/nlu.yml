@@ -28,16 +28,15 @@ nlu:
 #     - शुभ संध्या
 - intent: select_language_eng
   examples: |
+    - [English](language)
     - [ENGLISH](language)
     - [english](language)
-    - [English](language)
     - [eng](language)
 - intent: select_language_hi
   examples: |
+    - [Hindi](language)
     - [HINDI](language)
     - [hindi](language)
-    - [Hindi](language)
-    - [hi](language)
 - intent: greet_hi
   examples: |
     - नमस्ते

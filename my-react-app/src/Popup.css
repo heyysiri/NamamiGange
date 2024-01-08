@@ -4,12 +4,12 @@
   top: 52%;
   left: 68%;
   transform: translate3d(-50%, -50%, 0);
-  background: white;
-  padding: 10px;
+  /* background: transparent; */
+  /* padding: 10px; */
   height: 600px;
-  width: 800px;
+  width: 500px;
   border: 1px black;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
   z-index: 999;
   animation: zoomInOut 1.5s ease-in-out;/*cubic-bezier(0.68, -0.55, 0.27, 1.55);/*zoomInOut 1.5s ease-in-out;*/
 }
@@ -74,21 +74,11 @@
 }*/
 
 .popup-content {
-  max-width: 960px;
+  max-width: 800px;
+  height: 300px;
   margin: 0 auto;
 }
 
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 45px;
-}
-
-.closing {
-  animation: zoomOutToButton 1s ease-in-out; /* Adjust the duration for a slower framerate */
-}
 
 @keyframes zoomOutToButton {
   0% {

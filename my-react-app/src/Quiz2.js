@@ -99,7 +99,7 @@ const QuizNo2 = (props) => {
   const storedcurrentQuestion = localStorage.getItem("quizProgress") ? JSON.parse(localStorage.getItem("quizProgress")) : 0;
 //   console.log(storedcurrentQuestion);
   const [currentQuestion, setCurrentQuestion] = useState(storedcurrentQuestion);
-  const [storage, setClearStorage] = useState(false);
+  // const [storage, setClearStorage] = useState(false);
   const [optionSelected, setOptionSelected] = useState(false);
   const [quizContainerVisible, setQuizContainerVisible] = useState(true);
   const [loadedQuestion, setLoadedQuestion] = useState(questions[currentQuestion]);

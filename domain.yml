@@ -35,8 +35,6 @@ slots:
     - type: from_entity
       entity: rating
 actions:
-- select_language_actions_eng
-- select_language_actions_hi
 - action_weather_eng
 - action_weather_hi
 - utter_select_language
@@ -69,6 +67,10 @@ actions:
 - utter_industrial_effluent_monitoring_hi
 - utter_ganga_gram_hi
 responses:
+  utter_say_yes_eng:
+  - text: Please type 'yes' to continue.
+  utter_say_yes_hi:
+  - text: जारी रखने के लिए 'हाँ' टाइप करें।
   utter_mood:
   - text: Hope you're doing greeeat today! Cha-Cha Choudary is here to help you with this adventure!
   utter_mood_hi:
@@ -93,6 +95,10 @@ responses:
   - text: मैं चाचा चौधरी, नमामि गंगा प्रोग्राम का गाइड ... गंगा प्रदूषण के खिलाफ एक नायक!
   utter_cont:
   - text: Please ask any questions you may have. Enter 'no' to continue.
+  utter_type_cont_eng:
+  - text: Please type 'cont' to continue.
+  utter_type_cont_hi: 
+  - text: जारी रखने के लिए 'जारी रखें' टाइप करें
   utter_greet:
   - text: Welcome, dear friends, to the Namami Gange journey, where every drop counts in the story of Ganga's revival!
   utter_iamabot:
@@ -159,5 +165,5 @@ responses:
   - text: |
       कृपया पूछें जो भी प्रश्न हो सकते हैं। जारी रखने के लिए 'नहीं' दर्ज करें।
 session_config:
-  session_expiration_time: 30
+  session_expiration_time: 60
   carry_over_slots_to_new_session: false

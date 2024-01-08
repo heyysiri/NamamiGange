@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import "./styles.css";
 import MyPopup from "./Popup";
 import QuizNo1 from "./Quiz1";
-// import QuizNo2 from "./Quiz2";
+// import HelloAnimation from "./hello";
+import TalkingAnimation from "./talking";
+import NoddingAnimation from "./nodding";
 
 // const host = "localhost:5005"; // Change this to your desired localhost host
 
@@ -13,41 +15,108 @@ function App1() {
  const [showPopup1, setShowPopup1] = useState(false);
  const [reloadPage, setReloadPage] = useState(false);
  const [synthesis, setSynthesis] = useState(null);
+ const [isTTSActive, setIsTTSActive] = useState(false);
+ const [initialMessageSent, setInitialMessageSent] = useState(false);
+//  const [showPopupDelayed, setShowPopupDelayed] = useState(false);
 
   useEffect(() => {
     if (!window.speechSynthesis) {
       alert("Your browser does not support Text-to-Speech.");
     } else {
       setSynthesis(window.speechSynthesis);
+      // setIsTTSActive(true);
+      // console.log(isTTSActive)
     }
 
     return () => {
       if (synthesis) {
         synthesis.cancel();
+        // setIsTTSActive(false);
       }
     };
-  }, [synthesis]);
+    
+  }, [synthesis, initialMessageSent]);
 
+
+  useEffect(() => {
+    if (!initialMessageSent) {
+      sendInitialMessage();
+      setInitialMessageSent(true);
+    } }, [initialMessageSent]);
+
+    // useEffect(() => {
+    //   const popupTimer = setTimeout(() => {
+    //     setShowPopupDelayed(true);
+    //   }, 5000); // Delay of 5 seconds (5000 milliseconds)
+  
+    //   return () => {
+    //     clearTimeout(popupTimer); // Clear the timeout if component unmounts before the delay finishes
+    //   };
+    // }, []);
 
  const handlePopupToggle1 = () => {
    setShowPopup1(!showPopup1);
  };
 
  const handleMessageFromRasa = (message) => {
-  if (message === "Type 'cont' to continue") {
+  if (message === "Please type 'cont' to continue.") {
     setShowPopup1(true);
   }
-  else if(message==="Thank you for you rating and suggestions!"){
+  else if(message==="Thank you for your rating and suggestions!"){
     setReloadPage(true);
   }
   
 };
 useEffect(() => {
   if (reloadPage) {
-    // Reload the page when reloadPage state changes
     window.location.reload(true);
   }
 }, [reloadPage]);
+
+
+
+const sendInitialMessage = async () => {
+  const initialMessage = "English";
+  setMessages([{ text: initialMessage, sender: "user" }]);
+  const handleTextToSpeech1 = (text) => {
+    if ('speechSynthesis' in window) {
+      const speech = new SpeechSynthesisUtterance();
+      speech.text = text;
+      speech.lang = 'en-US'; // Change according to your language
+      speech.pitch = 0.6; // Change the pitch (example value)
+      speech.rate = 1.0; // Change the rate (example value)
+      speech.volume = 1.0;
+  
+      window.speechSynthesis.speak(speech);
+      setIsTTSActive(true);
+    } else {
+      alert('Your browser does not support Text-to-Speech.');
+    }
+  };
+
+  try {
+    const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: initialMessage }),
+    });
+
+    const botResponses = await response.json();
+
+    botResponses.forEach((response) => {
+      const botMessage = response.text || response.message || ''; // Extract text from different possible response keys
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: botMessage, sender: "bot" },
+      ]);
+      handleTextToSpeech1(botMessage);
+    });
+  } catch (error) {
+    console.error('Error sending initial message to Rasa:', error);
+  }
+};
 
 const handleSendMessage = async () => {
   if (inputText.trim() !== "") {
@@ -57,10 +126,10 @@ const handleSendMessage = async () => {
     ]);
 
     setInputText("");
-    
     const handleTextToSpeech = (text) => {
       if (synthesis && synthesis.speak) {
         const speech = new SpeechSynthesisUtterance();
+        setIsTTSActive(true);
         speech.text = text;
         speech.lang = "en-US"; // Change according to your language
         speech.pitch = 0.6; // Change the pitch (example value)
@@ -71,7 +140,6 @@ const handleSendMessage = async () => {
         alert('Your browser does not support Text-to-Speech.');
       }
     };
-    
     
     try {
       const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
@@ -107,6 +175,7 @@ const handleSendMessage = async () => {
 
  const handleSpeechToText = () => {
     if (window.hasOwnProperty("webkitSpeechRecognition")) {
+      setIsTTSActive(true);
       const recognition = new window.webkitSpeechRecognition();
       recognition.lang = "en-US";
       recognition.interimResults = false;
@@ -137,10 +206,17 @@ const handleSendMessage = async () => {
   }
 }, [messages]);
 
+
  return (
-    <div className="app">
+    <div className="app1">
+      {showPopup1 && <div className="chat-overlay"/>}
+      <div className="nodding-animation">
+      {isTTSActive ? <TalkingAnimation /> : <NoddingAnimation/>}
+       </div>
+      
+      
       <div className="chat-room">
-        <div className="messages">
+        <div className="messages" ref={messagesRef}>
           {messages.map((message, index) => (
             <div key={index} className={message.sender}>
               <div className="chat-bubble border round">{message.text}</div>
