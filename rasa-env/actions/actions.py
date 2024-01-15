@@ -1,4 +1,5 @@
 import g4f 
+from datetime import datetime, timedelta
 from rasa_sdk import Action, Tracker
 from typing import Any, Text, Dict, List
 from rasa_sdk.executor import CollectingDispatcher
@@ -7,7 +8,7 @@ import random
 import requests
 import sqlite3
 import asyncio
-
+import time
 class GPT3ChatCompletionAction(Action):
 
     def name(self):
@@ -37,7 +38,6 @@ class GPT3ChatCompletionAction(Action):
 
         if user_message.lower() == 'no':
             print("User said no, moving on...")
-            dispatcher.utter_message("Type 'cont' to continue")
             return []
 
         _providers = [
@@ -282,5 +282,36 @@ class FEEDBACK1(Action):
         elif language=='hindi':
             th = "अपनी रेटिंग और सुझाव के लिए धन्यवाद!"
             dispatcher.utter_message(text=th)
+
+        return []
+    
+class CheckUserActivity(Action):
+    def name(self):
+        return "action_check_user_activity"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        last_event_time = tracker.latest_message.get("timestamp")
+        current_time = datetime.now()
+        language = tracker.get_slot("language")
+        language = language.lower()
+        if last_event_time:
+            inactive_duration = current_time - last_event_time
+            # Check if the user has been inactive for 10 seconds
+            if inactive_duration > timedelta(seconds=10):
+                if(language=='english'):
+                    dispatcher.utter_message(response='utter_goodbye')
+                elif(language=='hindi'):
+                    dispatcher.utter_message(response='utter_goodbye_hi')
+
+        return []
+    
+class ActionDelayResponse(Action):
+    def name(self):
+        return "action_delay_response"
+
+    def run(self, dispatcher, tracker, domain):
+
+        time.sleep(10)
+        dispatcher.utter_message("Your delayed response here.")
 
         return []

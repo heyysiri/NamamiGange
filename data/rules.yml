@@ -22,17 +22,18 @@ rules:
   - intent: text_fb_hi
   - action: action_feedback1
   - action: action_restart
+  
 - rule: say goodbye anytime user says goodbye
   steps:
   - intent: goodbye
   - action: utter_goodbye
-  - action: utter_ask_fb
+  - action: action_restart
 
 - rule: say goodbye anytime user says goodbye hindi
   steps:
   - intent: goodbye_hi
   - action: utter_goodbye_hi
-  - action: utter_ask_fb_hi
+  - action: action_restart
 
 - rule: continue for english
   steps:

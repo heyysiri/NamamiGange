@@ -4,7 +4,7 @@ stories:
 
 - story: interactive_story_1_eng
   steps:
-  - intent: goodbye
+  - intent: Feedback_ENG
   - action: utter_goodbye
   - action: utter_ask_fb
   - intent: emo_fb
@@ -20,7 +20,7 @@ stories:
 
 - story: interactive_story_2_eng
   steps:
-  - intent: goodbye
+  - intent: Feedback_ENG
   - action: utter_goodbye
   - action: utter_ask_fb
   - intent: emo_fb
@@ -36,7 +36,7 @@ stories:
 
 - story: interactive_story_3_eng
   steps:
-  - intent: goodbye
+  - intent: Feedback_ENG
   - action: utter_goodbye
   - action: utter_ask_fb
   - intent: emo_fb
@@ -53,7 +53,7 @@ stories:
 
 - story: interactive_story_4_eng
   steps:
-  - intent: goodbye
+  - intent: Feedback_ENG
   - action: utter_goodbye
   - action: utter_ask_fb
   - intent: emo_fb
@@ -69,7 +69,7 @@ stories:
 
 - story: interactive_story_5_eng
   steps:
-  - intent: goodbye
+  - intent: Feedback_ENG
   - action: utter_goodbye
   - action: utter_ask_fb
   - intent: emo_fb
@@ -85,7 +85,7 @@ stories:
 
 - story: interactive_story_1_hi
   steps:
-  - intent: goodbye_hi
+  - intent: Feedback_HI
   - action: utter_goodbye_hi
   - action: utter_ask_fb_hi
   - intent: emo_fb
@@ -101,7 +101,7 @@ stories:
 
 - story: interactive_story_2_hi
   steps:
-  - intent: goodbye_hi
+  - intent: Feedback_HI
   - action: utter_goodbye_hi
   - action: utter_ask_fb_hi
   - intent: emo_fb
@@ -117,7 +117,7 @@ stories:
 
 - story: interactive_story_3_hi
   steps:
-  - intent: goodbye_hi
+  - intent: Feedback_HI
   - action: utter_goodbye_hi
   - action: utter_ask_fb_hi
   - intent: emo_fb
@@ -134,7 +134,7 @@ stories:
 
 - story: interactive_story_4_hi
   steps:
-  - intent: goodbye_hi
+  - intent: Feedback_HI
   - action: utter_goodbye_hi
   - action: utter_ask_fb_hi
   - intent: emo_fb
@@ -150,7 +150,7 @@ stories:
 
 - story: interactive_story_5_hi
   steps:
-  - intent: goodbye_hi
+  - intent: Feedback_HI
   - action: utter_goodbye_hi
   - action: utter_ask_fb_hi
   - intent: emo_fb
@@ -214,34 +214,47 @@ stories:
   # - action: utter_intro
   - action: utter_pillars_of_namami_gange
   - action: utter_say_yes_eng
+  # - action: action_check_user_activity
   - intent: affirm
   - action: utter_sewerage_treatment_capacity #1
   - action: utter_river_front_development #2
   - action: utter_cont
-  - intent: generate_text
+  # - action: action_check_user_activity
+  - intent: generate_text 
   - action: action_gpt2_eng
   - action: utter_type_cont_eng
-  - intent: continue_eng
-  - action: utter_river_surface_cleaning #3
+  # - action: action_check_user_activity
+  - intent: continue_eng 
+  - action: action_delay_response
+  - action: utter_river_surface_cleaning #3 #HERE
   - action: utter_bio_diversity_conservation #4
   - action: utter_cont
+  # - action: action_check_user_activity
   - intent: generate_text
   - action: action_gpt2_eng
   - action: utter_type_cont_eng
-  - intent: continue_eng
+  # - action: action_check_user_activity
+  - intent: continue_eng #HERE
+  - action: action_delay_response
   - action: utter_afforestation #5
   - action: utter_public_awareness #6
   - action: utter_cont
+  # - action: action_check_user_activity
   - intent: generate_text
   - action: action_gpt2_eng
   - action: utter_type_cont_eng
-  - intent: continue_eng
+  # - action: action_check_user_activity
+  - intent: continue_eng #HERE
+  - action: action_delay_response
   - action: utter_industrial_effluent_monitoring #7
   - action: utter_ganga_gram #8
+  # - action: action_check_user_activity
   - action: utter_cont
   - intent: generate_text
   - action: action_gpt2_eng
-  # - action: utter_say_goodbye_eng
+  - action: utter_type_cont_eng
+  - intent: continue_eng 
+
 
 - story: user_selects_hindi
   steps:

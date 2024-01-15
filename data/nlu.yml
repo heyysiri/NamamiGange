@@ -55,6 +55,20 @@ nlu:
     - बेशक
     - यह अच्छा लगता है
     - सही
+
+- intent: Feedback_ENG
+  examples: |
+    - I would like to give feedback in english
+    - Feedback_eng
+    - FBENG
+    - Giving feedback in english
+
+- intent: Feedback_HI
+  examples: |
+    - I would like to give feedback in hindi
+    - Feedback_hi
+    - FBHI
+    - Giving feedback in hindi
 - intent: goodbye
   examples: |
     - cu
