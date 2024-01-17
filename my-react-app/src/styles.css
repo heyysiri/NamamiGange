@@ -1,101 +1,60 @@
-/* styles2.css */
+/* styles.css */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
-  background-color: white;
+  background-color: darkgray;
 }
 
 .app {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-end;
   height: 100vh;
-  /* background-color: lightblue; */
 }
+
 .app1 {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-end;
   height: 100vh;
-  /* background-color: lightblue; */
 }
+
 .app2 {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-end;
   height: 100vh;
-  /* background-color: lightblue; */
 }
 
-
-.hello-animation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex: 1;
-}
-.talking-animation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex: 1;
-}
-.nodding-animation{
- 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex: 1;
+.other-section {
+  margin-top: 20px; 
+  position: fixed;
+  top: 2%;
+  bottom: 1%;
+  right: 36%;
+  width: 500px;
+  height: 700px;
   
+}
+
+
+.other-section img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .chat-room {
   border: 1px white;
-  width: 100%;
-  height: 100vh;
+  width: 1000px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   overflow-y:scroll;
   transition: overflow-y 0.3s ease;
-  /* justify-content: flex-end; /* Ensure the content aligns to the bottom */
-  /* align-items: flex-end; */ 
 }
-
-@media screen and (max-width: 600px) {
-  .chat-room {
-    width: 100%;
-    height: 100vh;
-  }
-}
-
-@media screen and (min-width: 601px) {
-  .chat-room {
-    width: 830px;
-    height: 500px;
-  }
-}
-
-.messages {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-@media screen and (max-width: 600px) {
-  .messages {
-    width: 30%;
-    display: flex;
-    flex-direction: flex-end;
-    flex-direction: column;
-  }
-}
-
 
 .chat-overlay {
   position: fixed;
@@ -106,6 +65,14 @@ body {
   height: 700px;
   background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
   z-index: 99; /* Ensure the overlay is above the chatroom */
+}
+
+.messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .user,
@@ -120,22 +87,6 @@ body {
 
 .bot {
   align-self: flex-start;
-}
-.show-scrollbar {
-  overflow-y: scroll;
-}
-
-.chat-room::-webkit-scrollbar {
-  width: 8px;
-}
-
-.chat-room::-webkit-scrollbar-thumb {
-  background-color: blue;
-  border-radius: 4px;
-}
-
-.chat-room::-webkit-scrollbar-thumb:hover {
-  background-color:blue;
 }
 
 /*.chat-bubble {
@@ -163,17 +114,9 @@ body {
   overflow-wrap: anywhere;
 }*/
 
-.messages {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  color: white;
-}
 .chat-bubble {
   display: flex;
-  background-color: lightsalmon;
+  background-color: rgb(19, 112, 162);
   padding: 20px;
   border-radius: 30px;
   min-width: 40px;
@@ -189,7 +132,7 @@ body {
 .chat-bubble:before,
 .chat-bubble:after {
   content: "";
-  background-color: lightsalmon;
+  background-color: rgb(19, 112, 162);
   border-radius: 50%;
   display: block;
   position: absolute;
@@ -201,7 +144,7 @@ body {
   height: 44px;
   top: -12px;
   left: 28px;
-  box-shadow: -50px 30px 0 -12px lightsalmon;
+  box-shadow: -50px 30px 0 -12px rgb(19, 112, 162);
 }
 .user .chat-bubble:after {
   bottom: -10px;
@@ -209,10 +152,10 @@ body {
   width: 30px;
   height: 30px;
   box-shadow:
-    40px -34px 0 0 lightsalmon,
-    -28px -6px 0 -2px lightsalmon,
-    -24px 17px 0 -6px lightsalmon,
-    -5px 25px 0 -10px lightsalmon;
+    40px -34px 0 0 rgb(19, 112, 162),
+    -28px -6px 0 -2px rgb(19, 112, 162),
+    -24px 17px 0 -6px rgb(19, 112, 162),
+    -5px 25px 0 -10px rgb(19, 112, 162);
 }
 
 .bot .chat-bubble:before {
@@ -221,10 +164,10 @@ body {
   top: -12px;
   right: 30px;
   box-shadow:
-    -50px 30px 0 -12px lightsalmon,
-    44px 20px 0 0 lightsalmon,
-    -10px 17px 0 -6px lightsalmon,
-    -5px 25px 0 -10px lightsalmon;
+    -50px 30px 0 -12px rgb(19, 112, 162),
+    44px 20px 0 0 rgb(19, 112, 162),
+    -10px 17px 0 -6px rgb(19, 112, 162),
+    -5px 25px 0 -10px rgb(19, 112, 162);
 }
 .bot .chat-bubble:after {
   bottom: -10px;
@@ -232,37 +175,137 @@ body {
   width: 30px;
   height: 30px;
   box-shadow:
-    40px -34px 0 0 lightsalmon,
-    -28px -6px 0 -2px lightsalmon,
-    -24px 17px 0 -6px lightsalmon,
-    -5px 25px 0 -10px lightsalmon;
+    40px -34px 0 0 rgb(19, 112, 162),
+    -28px -6px 0 -2px rgb(19, 112, 162),
+    -24px 17px 0 -6px rgb(19, 112, 162),
+    -5px 25px 0 -10px rgb(19, 112, 162);
 }
 
-
+/*.chat-bubble {
+  margin: 20px;
+  display: inline-block;
+  padding: 7px;
+  position: relative;
+  width: auto;
+  height: auto;
+  background-color: yellow;
+  overflow-wrap: anywhere;
+}
+/* .border{
+  border: 5px solid #666;
+}*/
 .round {
   border-radius: 30px;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
 }
+/* .bot .chat-bubble:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 12%;
+  right: auto;
+  top: auto;
+	bottom: -30px;
+	border: 14px solid;
+	border-color: #666 transparent transparent #666;
+} */
+/*.bot .chat-bubble:after {
+  content: " ";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 14%;
+  right: auto;
+  top: auto;
+  bottom: -20px;
+  border: 12px solid;
+  border-color: yellow transparent transparent yellow;
+}*/
 
+/*.user .chat-bubble:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: auto;
+	right: 12%;
+	bottom: -25px;
+	border: 12px solid;
+	border-color: #666 #666 transparent transparent;
+}*/
+/*.user .chat-bubble:after {
+  content: " ";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: 14%;
+  bottom: -16px;
+  border: 10px solid;
+  border-color: yellow yellow transparent transparent;
+}*/
+
+/*.user .chat-bubble {
+  background-color: lightseagreen;
+  border-radius: 30px 30px 5px 30px;
+  color: #fff;
+  float: right;
+  display: flex;
+}
+
+.bot .chat-bubble {
+  background-color: lightcoral;
+  border-radius: 30px 30px 30px 5px;
+  color: #fff;
+  /*float: left;*/
+
+/*.chat-bubble:after {
+  content: "";
+  display: block;
+  clear: both;
+}*/
 .input-container {
   display: flex;
   padding: 25px;
+  color: lightblue;
+}
+
+.show-scrollbar {
+  overflow-y: scroll;
+}
+
+.chat-room::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-room::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.chat-room::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
 }
 
 input {
   flex: 1;
   margin-right: 10px;
   border-radius: 50px;
+  background-color: lightblue;
+  border-color: rgb(19, 112, 162);
 }
+
 .eng{
-  background-color: #4caf50;
+  background-color: rgb(19, 112, 162);
   color: white;
   border-radius: 150px;
-  border: none;
+  border: 1px;
+  margin-right: 5px;
   padding: 35px 70px;
   cursor: pointer;
-  font-size: small;
+  font-size: large;
   font-family: 'Poppins', sans-serif;
   transition: background-color 0.3s ease;
 }
@@ -270,13 +313,14 @@ input {
   background-color: #1e87dc;
 }
 .hi{
-  background-color: #4caf50;
+  background-color: rgb(19, 112, 162);
   color: white;
   border-radius: 150px;
-  border: none;
+  border: 1px;
+  margin-left: 5px;
   padding: 35px 70px;
   cursor: pointer;
-  font-size: small;
+  font-size: large;
   font-family: 'Poppins', sans-serif;
   transition: background-color 0.3s ease;
 }
@@ -286,19 +330,20 @@ input {
 .language-buttons{
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   height: 100vh;
-  margin-right: 500px;
+  margin-right: 400px;
 }
+
 .button1 {
-  background-image: url(images/send-message.png);
+  background-image: url(send-message.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 27px;
   height: 30px;
-  border: 1px solid white;
-  color: white;
+  border: 1px solid lightblue;
+  background-color:  lightblue;
   cursor: pointer;
   margin-right: 2px;
 }
@@ -311,12 +356,12 @@ input {
 }
 
 .button2 {
-  background-image: url(images/microphone.png);
+  background-image: url(microphone.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 40px;
-  height: 30px;
+  height: 36px;
   border: 1px lightblue;
   background-color: lightblue;
   cursor: pointer;
@@ -329,3 +374,97 @@ input {
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
   opacity: 0.7;
 }
+
+.image-response {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.button3 {
+  width: 40px;
+  height: 30px;
+  border: 1px lightblue;
+  background-color: lightblue;
+  cursor: pointer;
+  margin-left: 4px;
+
+}
+
+.logoeng
+{
+  width: 150px;
+  height: 90px;
+  left:3%;
+  top:2%;
+  position: absolute;
+  background-image: url(Namami_Gange_Logo_English-removebg-preview.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: lightblue;
+  padding: 1px;
+
+}
+
+.logohin
+{
+  width: 150px;
+  height: 100px;
+  left:3%;
+  top:2%;
+  position: absolute;
+  background-image: url(Namami_Gange_Logo_Hindi-removebg-preview.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: lightblue;
+  padding: 1px;
+
+}
+
+header {
+  background: linear-gradient(to bottom,rgb(19, 112, 162), rgb(72, 72, 174));
+  color: white;
+  padding: 15px;
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+  filter: blur(0.5px);
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+}
+
+@keyframes typing {
+  0% {
+    border-right: 0.15em solid rgba(255, 255, 255, 0.75);
+  }
+  50% {
+    border-right: 0.15em solid transparent;
+  }
+  100% {
+    border-right: 0.15em solid rgba(255, 255, 255, 0.75);
+  }
+}
+
+.typing-animation {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.15em solid rgba(255, 255, 255, 0.75);
+  animation: typing 1s steps(20) infinite;
+}
+
