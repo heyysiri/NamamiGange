@@ -82,6 +82,8 @@ responses:
   - text: Alright! Goodbye!
   utter_ask_fb:
   - text: 'Please provide a rating (1-5):'
+  utter_goodjob_eng:
+  - text: Great job! You've completed the adventure!
   utter_ask_fb_hi:
   - text: 'कृपया एक रेटिंग दें (1-5):'
   utter_suggestions:
@@ -99,7 +101,7 @@ responses:
   utter_cont:
   - text: Please ask any questions you may have. Enter 'no' to continue.
   utter_type_cont_eng:
-  - text: Please type 'cont' to continue.
+  - text: Please type 'cont' to continue after attempting quiz.
   utter_type_cont_hi: 
   - text: जारी रखने के लिए 'जारी रखें' टाइप करें
   utter_greet:

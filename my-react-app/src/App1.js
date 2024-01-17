@@ -18,7 +18,7 @@ function App1() {
  const [initialMessageSent, setInitialMessageSent] = useState(false);
  const [showDelayedPopup, setShowDelayedPopup] = useState(false);
   const[isTyping, setIsTyping] = useState(false);
-  const [disableBotMessages, setDisableBotMessages] = useState(false);
+  // const [disableBotMessages, setDisableBotMessages] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   useEffect(() => {
@@ -48,17 +48,24 @@ function App1() {
 
  const handlePopupToggle1 = () => {
    setShowDelayedPopup(true);
-   setDisableBotMessages(true);
+  //  setDisableBotMessages(true);
  };
 
  const handleMessageFromRasa = (message) => {
-  // if (message === "Please type 'cont' to continue.") {
-  //   setTimeout(() => {
-  //     setShowDelayedPopup(true);
-  //   }, 10000);
-  // }
-  if(message==="Thank you for your rating and suggestions!"){
+  if ((message === "Please type 'cont' to continue after attempting quiz.")) {
+    setTimeout(() => {
+      setShowDelayedPopup(true);
+    }, 10000);
+  }
+  if(message==="Alright! Goodbye!"){
+    setTimeout(() => {
     setReloadPage(true);
+    }, 4000);
+  }
+  else if(message==="Thank you for your rating and suggestions!"){
+    setTimeout(() => {
+    setReloadPage(true);
+    }, 4000);
   }
   
 };
@@ -73,16 +80,16 @@ const handleTextToSpeech1 = (text) => {
     speech.text = text;
     speech.lang = 'en-US'; // Change according to your language
     speech.pitch = 0.6; // Change the pitch (example value)
-    speech.rate = 1.0; // Change the rate (example value)
+    speech.rate = 2.0; // Change the rate (example value)
     speech.volume = 1.0;
-speech.onstart = () => {
+    speech.onstart = () => {
       setIsTTSActive(true);
     };
     speech.onend = () => {
       setIsTTSActive(false);
     };
     window.speechSynthesis.speak(speech);
-    setIsTTSActive(true);
+    // setIsTTSActive(true);
   } else {
     alert('Your browser does not support Text-to-Speech.');
   }
@@ -188,17 +195,19 @@ useEffect(() => {
   }
 
 
-  if (!isTyping && !isTTSActive && messages.length > 0) {
-    typingTimeout = setTimeout(handleTypingTimeout, 10000); // 10 seconds timeout
+  if (!isTyping && !showDelayedPopup && !isTTSActive && messages.length > 0) {
+    typingTimeout = setTimeout(handleTypingTimeout, 15000); // 15 seconds timeout
   }
-
+  else if(showDelayedPopup && !isTTSActive && messages.length>0){
+    typingTimeout = setTimeout(handleTypingTimeout, 30000); // 15 seconds timeout
+  }
   return () => {
     clearTimeout(typingTimeout); 
   };
 }, [isTyping, isTTSActive, messages, isPopupVisible]);
 
 const handleSendMessage = async () => {
-  if (inputText.trim() !== "" && !disableBotMessages) {
+  if (inputText.trim() !== "") {
     setMessages((prevMessages) => [
       ...prevMessages,
       { text: inputText, sender: "user" },
@@ -221,16 +230,16 @@ const handleSendMessage = async () => {
           botResponses.forEach((response) => {
             if (response.text === "TriggerPopupAction") {
               setShowDelayedPopup(true);
-              setDisableBotMessages(true);
+              // setDisableBotMessages(true);
             } else {
-              if(!showDelayedPopup){
-                setTimeout(() => {
+              // if(!showDelayedPopup){
+                // setTimeout(() => {
                   setMessages((prevMessages) => [
                     ...prevMessages,
                     { text: response.text, sender: "bot" },
                   ]);
-                  }, 1000);
-              }
+                  // }, 1000);
+              // }
               handleTextToSpeech1(response.text);
               handleMessageFromRasa(response.text);
             }
@@ -238,9 +247,9 @@ const handleSendMessage = async () => {
       
 
       const userInput = inputText.toLowerCase();
-      if (!showDelayedPopup && (userInput === "cont" || userInput === "continue")) {
+      if (!showDelayedPopup && (userInput === "no")) {
         setShowDelayedPopup(true);
-        setDisableBotMessages(true);
+        // setDisableBotMessages(true);
       }
     
     } catch (error) {
@@ -308,7 +317,7 @@ const handleSendMessage = async () => {
         <div className="input-container">
           <input
             type="text"
-            placeholder="Type 'Bye' to exit..."
+            placeholder="Type a message..."
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
@@ -323,13 +332,13 @@ const handleSendMessage = async () => {
         <MyPopup onClose={() => {
           setShowDelayedPopup(false);
           setIsPopupVisible(false);
-          setDisableBotMessages(false);
+          // setDisableBotMessages(false);
            // Enable bot messages when the popup disappears
         }}>
           <QuizNo1 onClose={() => {
             setShowDelayedPopup(false);
             setIsPopupVisible(false);
-            setDisableBotMessages(false); // Enable bot messages when the popup disappears
+            // setDisableBotMessages(false); // Enable bot messages when the popup disappears
           }} />
         </MyPopup>
       )}

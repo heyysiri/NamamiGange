@@ -27,6 +27,8 @@ class GPT3ChatCompletionAction(Action):
             prefix_eng = random.choice(chacha_prefix_eng)
             response = prefix_eng + " " + response + " " + selected_line_eng
             dispatcher.utter_message(text=str(response))
+            # await asyncio.sleep(10)
+            dispatcher.utter_message(text="Please type 'cont' to continue after attempting quiz.")
         except Exception as e:
             dispatcher.utter_message(text=f"Failed to fetch response from {provider.__name__}: {e}")
 
@@ -38,6 +40,7 @@ class GPT3ChatCompletionAction(Action):
 
         if user_message.lower() == 'no':
             print("User said no, moving on...")
+            dispatcher.utter_message(text="Please type 'cont' to continue.")
             return []
 
         _providers = [
@@ -305,13 +308,13 @@ class CheckUserActivity(Action):
 
         return []
     
+
 class ActionDelayResponse(Action):
     def name(self):
         return "action_delay_response"
 
-    def run(self, dispatcher, tracker, domain):
-
-        time.sleep(10)
-        dispatcher.utter_message("Your delayed response here.")
-
+    async def run(self, dispatcher, tracker, domain):
+        print("Just got into action_delay_response")
+        await asyncio.sleep(10)
+        print("After 10 seconds")
         return []

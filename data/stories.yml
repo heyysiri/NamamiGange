@@ -222,38 +222,40 @@ stories:
   # - action: action_check_user_activity
   - intent: generate_text 
   - action: action_gpt2_eng
-  - action: utter_type_cont_eng
+  # - action: utter_type_cont_eng
   # - action: action_check_user_activity
   - intent: continue_eng 
-  - action: action_delay_response
+  # - action: action_delay_response
   - action: utter_river_surface_cleaning #3 #HERE
   - action: utter_bio_diversity_conservation #4
   - action: utter_cont
   # - action: action_check_user_activity
   - intent: generate_text
   - action: action_gpt2_eng
-  - action: utter_type_cont_eng
+  # - action: action_delay_response
+  # - action: utter_type_cont_eng
   # - action: action_check_user_activity
   - intent: continue_eng #HERE
-  - action: action_delay_response
   - action: utter_afforestation #5
   - action: utter_public_awareness #6
   - action: utter_cont
   # - action: action_check_user_activity
   - intent: generate_text
   - action: action_gpt2_eng
-  - action: utter_type_cont_eng
+  # - action: utter_type_cont_eng
   # - action: action_check_user_activity
   - intent: continue_eng #HERE
-  - action: action_delay_response
+  # - action: action_delay_response
   - action: utter_industrial_effluent_monitoring #7
   - action: utter_ganga_gram #8
   # - action: action_check_user_activity
   - action: utter_cont
   - intent: generate_text
   - action: action_gpt2_eng
-  - action: utter_type_cont_eng
+  # - action: utter_type_cont_eng
   - intent: continue_eng 
+  # - action: action_delay_response
+  - action: utter_goodjob_eng
 
 
 - story: user_selects_hindi
