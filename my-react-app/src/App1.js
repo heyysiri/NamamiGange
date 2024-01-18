@@ -6,8 +6,6 @@ import QuizNo1 from "./Quiz1";
 import TalkingAnimation from "./talking";
 import NoddingAnimation from "./nodding";
 
-// const host = "localhost:5005"; // Change this to your desired localhost host
-
 function App1() {
  const [messages, setMessages] = useState([]);
  const [inputText, setInputText] = useState("");
@@ -18,7 +16,6 @@ function App1() {
  const [initialMessageSent, setInitialMessageSent] = useState(false);
  const [showDelayedPopup, setShowDelayedPopup] = useState(false);
   const[isTyping, setIsTyping] = useState(false);
-  // const [disableBotMessages, setDisableBotMessages] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   useEffect(() => {

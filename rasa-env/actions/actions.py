@@ -308,13 +308,3 @@ class CheckUserActivity(Action):
 
         return []
     
-
-class ActionDelayResponse(Action):
-    def name(self):
-        return "action_delay_response"
-
-    async def run(self, dispatcher, tracker, domain):
-        print("Just got into action_delay_response")
-        await asyncio.sleep(10)
-        print("After 10 seconds")
-        return []

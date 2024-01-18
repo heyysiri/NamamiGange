@@ -86,6 +86,7 @@ nlu:
   examples: |
     - अलविदा
     - अलविदा फिर मिलेंगे
+
 - intent: affirm
   examples: |
     - yes
