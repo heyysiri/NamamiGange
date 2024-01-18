@@ -29,7 +29,9 @@ function App1() {
 
     return () => {
       if (synthesis && synthesis.speaking) {
+      if (synthesis && synthesis.speaking) {
         synthesis.cancel();
+        setIsTTSActive(false); // Update the TTS status accordingly
         setIsTTSActive(false); // Update the TTS status accordingly
       }
     };
@@ -46,6 +48,8 @@ function App1() {
  const handlePopupToggle1 = () => {
    setShowDelayedPopup(true);
   //  setDisableBotMessages(true);
+   setShowDelayedPopup(true);
+  //  setDisableBotMessages(true);
  };
 
  const handleMessageFromRasa = (message) => {
@@ -58,12 +62,24 @@ function App1() {
     setTimeout(() => {
     setReloadPage(true);
     }, 4000);
+  if ((message === "Please type 'cont' to continue after attempting quiz.")) {
+    setTimeout(() => {
+      setShowDelayedPopup(true);
+    }, 10000);
   }
-  else if(message==="Thank you for your rating and suggestions!"){
+  if(message==="Alright! Goodbye!"){
     setTimeout(() => {
     setReloadPage(true);
     }, 4000);
   }
+  else if(message==="Thank you for your rating and suggestions!"){
+    setTimeout(() => {
+    setTimeout(() => {
+    setReloadPage(true);
+    }, 4000);
+    }, 4000);
+  }
+  
   
 };
 useEffect(() => {
@@ -80,7 +96,62 @@ const handleTextToSpeech1 = (text) => {
     speech.rate = 2.0; // Change the rate (example value)
     speech.volume = 1.0;
     speech.onstart = () => {
+const handleTextToSpeech1 = (text) => {
+  if ('speechSynthesis' in window) {
+    const speech = new SpeechSynthesisUtterance();
+    speech.text = text;
+    speech.lang = 'en-US'; // Change according to your language
+    speech.pitch = 0.6; // Change the pitch (example value)
+    speech.rate = 2.0; // Change the rate (example value)
+    speech.volume = 1.0;
+    speech.onstart = () => {
       setIsTTSActive(true);
+    };
+    speech.onend = () => {
+      setIsTTSActive(false);
+    };
+    window.speechSynthesis.speak(speech);
+    // setIsTTSActive(true);
+  } else {
+    alert('Your browser does not support Text-to-Speech.');
+  }
+};
+
+const handleFeedback = async () => {
+  const feedbackMessage = "I would like to give feedback in english";
+  setMessages([{ text: feedbackMessage, sender: "user" }]);
+  
+
+  try {
+    const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: feedbackMessage }),
+    });
+
+    const botResponses = await response.json();
+
+    botResponses.forEach((response) => {
+      const botMessage = response.text || response.message || ''; // Extract text from different possible response keys
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: botMessage, sender: "bot" },
+      ]);
+      handleTextToSpeech1(botMessage);
+    });
+  } catch (error) {
+    console.error('Error sending initial message to Rasa:', error);
+  }
+}
+
+
+
+const sendInitialMessage = async () => {
+  const initialMessage = "English";
+  setMessages([{ text: initialMessage, sender: "user" }]);
+  
     };
     speech.onend = () => {
       setIsTTSActive(false);
@@ -202,6 +273,57 @@ useEffect(() => {
     clearTimeout(typingTimeout); 
   };
 }, [isTyping, isTTSActive, messages, isPopupVisible]);
+useEffect(() => {
+  let typingTimeout;
+  // if (!isPopupVisible) {
+  const handleTypingTimeout = () => {
+    // Send a "bye" message to the bot
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { text: "bye", sender: "user" },
+    ]);
+
+    // Handle sending "bye" message to Rasa (similar to handleSendMessage)
+    const sendByeMessage = async () => {
+      try {
+        const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message: "bye" }),
+        });
+
+        const botResponses = await response.json();
+
+        botResponses.forEach((response) => {
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { text: response.text, sender: "bot" },
+          ]);
+          handleTextToSpeech1(response.text);
+          handleMessageFromRasa(response.text);
+        });
+        setReloadPage(true);
+      } catch (error) {
+        console.error('Error sending "bye" message to Rasa:', error);
+      }
+    };
+
+    sendByeMessage(); // Send "bye" message to Rasa
+  }
+
+
+  if (!isTyping && !showDelayedPopup && !isTTSActive && messages.length > 0) {
+    typingTimeout = setTimeout(handleTypingTimeout, 15000); // 15 seconds timeout
+  }
+  else if(showDelayedPopup && !isTTSActive && messages.length>0){
+    typingTimeout = setTimeout(handleTypingTimeout, 30000); // 15 seconds timeout
+  }
+  return () => {
+    clearTimeout(typingTimeout); 
+  };
+}, [isTyping, isTTSActive, messages, isPopupVisible]);
 
 const handleSendMessage = async () => {
   if (inputText.trim() !== "") {
@@ -211,6 +333,7 @@ const handleSendMessage = async () => {
     ]);
 
     setInputText("");
+
 
     try {
       const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
@@ -223,6 +346,31 @@ const handleSendMessage = async () => {
 
       const botResponses = await response.json();
 
+      // if (!showDelayedPopup) {
+          botResponses.forEach((response) => {
+            if (response.text === "TriggerPopupAction") {
+              setShowDelayedPopup(true);
+              // setDisableBotMessages(true);
+            } else {
+              // if(!showDelayedPopup){
+                // setTimeout(() => {
+                  setMessages((prevMessages) => [
+                    ...prevMessages,
+                    { text: response.text, sender: "bot" },
+                  ]);
+                  // }, 1000);
+              // }
+              handleTextToSpeech1(response.text);
+              handleMessageFromRasa(response.text);
+            }
+          });
+      
+
+      const userInput = inputText.toLowerCase();
+      if (!showDelayedPopup && (userInput === "no")) {
+        setShowDelayedPopup(true);
+        // setDisableBotMessages(true);
+      }
       // if (!showDelayedPopup) {
           botResponses.forEach((response) => {
             if (response.text === "TriggerPopupAction") {
