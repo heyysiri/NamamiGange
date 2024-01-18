@@ -5,23 +5,18 @@ import QuizNo1 from "./Quiz1";
 // import HelloAnimation from "./hello";
 import TalkingAnimation from "./talking";
 import NoddingAnimation from "./nodding";
-import BlinkingAnimation from "./blinking"; 
 
 function App1() {
-  
  const [messages, setMessages] = useState([]);
  const [inputText, setInputText] = useState("");
- const [isTyping, setIsTyping] = useState(false);
  const messagesRef = useRef(null);
  const [reloadPage, setReloadPage] = useState(false);
  const [synthesis, setSynthesis] = useState(null);
  const [isTTSActive, setIsTTSActive] = useState(false);
- const [isBlinkingActive,setIsBlinkingActive]= useState(false);
  const [initialMessageSent, setInitialMessageSent] = useState(false);
  const [showDelayedPopup, setShowDelayedPopup] = useState(false);
- const [isPopupVisible, setIsPopupVisible] = useState(false);
- 
-//  const [showPopupDelayed, setShowPopupDelayed] = useState(false);
+  const[isTyping, setIsTyping] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   useEffect(() => {
     if (!window.speechSynthesis) {
@@ -32,17 +27,14 @@ function App1() {
       // console.log(isTTSActive)
     }
 
-
-      return () => {
-        if (synthesis && synthesis.speaking) {
-          synthesis.cancel();
-          setIsTTSActive(false); // Update the TTS status accordingly
-        }
-      };
-    
+    return () => {
+      if (synthesis && synthesis.speaking) {
+        synthesis.cancel();
+        setIsTTSActive(false); // Update the TTS status accordingly
+      }
+    };
     
   }, [synthesis, initialMessageSent]);
-  
 
 
   useEffect(() => {
@@ -51,30 +43,34 @@ function App1() {
       setInitialMessageSent(true);
     } }, [initialMessageSent]);
 
-  
-    
-  
- 
-    const handleMessageFromRasa = (message) => {
-      if ((message === "Please type 'cont' to continue after attempting quiz.")) {
-        setTimeout(() => {
-          setShowDelayedPopup(true);
-        }, 10000);
-      }
-      if(message==="Alright! Goodbye!"){
-        setTimeout(() => {
-        setReloadPage(true);
-        }, 4000);
-      }
-      else if(message==="Thank you for your rating and suggestions!"){
-        setTimeout(() => {
-        setReloadPage(true);
-        }, 4000);
-      }
-      
-    };    
+ const handlePopupToggle1 = () => {
+   setShowDelayedPopup(true);
+  //  setDisableBotMessages(true);
+ };
 
-
+ const handleMessageFromRasa = (message) => {
+  if ((message === "Please type 'cont' to continue after attempting quiz.")) {
+    setTimeout(() => {
+      setShowDelayedPopup(true);
+    }, 10000);
+  }
+  if(message==="Alright! Goodbye!"){
+    setTimeout(() => {
+    setReloadPage(true);
+    }, 4000);
+  }
+  else if(message==="Thank you for your rating and suggestions!"){
+    setTimeout(() => {
+    setReloadPage(true);
+    }, 4000);
+  }
+  
+};
+useEffect(() => {
+  if (reloadPage) {
+    window.location.reload(true);
+  }
+}, [reloadPage]);
 const handleTextToSpeech1 = (text) => {
   if ('speechSynthesis' in window) {
     const speech = new SpeechSynthesisUtterance();
@@ -84,19 +80,18 @@ const handleTextToSpeech1 = (text) => {
     speech.rate = 2.0; // Change the rate (example value)
     speech.volume = 1.0;
     speech.onstart = () => {
-
       setIsTTSActive(true);
     };
     speech.onend = () => {
       setIsTTSActive(false);
     };
     window.speechSynthesis.speak(speech);
-    
-    setIsTTSActive(true);
+    // setIsTTSActive(true);
   } else {
     alert('Your browser does not support Text-to-Speech.');
   }
 };
+
 const handleFeedback = async () => {
   const feedbackMessage = "I would like to give feedback in english";
   setMessages([{ text: feedbackMessage, sender: "user" }]);
@@ -131,7 +126,7 @@ const handleFeedback = async () => {
 const sendInitialMessage = async () => {
   const initialMessage = "English";
   setMessages([{ text: initialMessage, sender: "user" }]);
-   
+  
 
   try {
     const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
@@ -156,124 +151,9 @@ const sendInitialMessage = async () => {
     console.error('Error sending initial message to Rasa:', error);
   }
 };
-const handleTextToSpeech = (text) => {
-      if (synthesis && synthesis.speak) {
-        const speech = new SpeechSynthesisUtterance();
-        
-        setIsTTSActive(true);
-        speech.text = text;
-        speech.lang = "en-US"; // Change according to your language
-        speech.pitch = 0.6; // Change the pitch (example value)
-        speech.rate = 2.0; // Change the rate (example value)
-        speech.volume = 1.0;
-        speech.onstart = () => 
-        {
-          setIsTTSActive(true);
-        };
-        speech.onend = () => {
-          setIsTTSActive(false);
-        };
-        synthesis.speak(speech);
-      } else {
-        alert('Your browser does not support Text-to-Speech.');
-      }
-    };
-const handleSendMessage = async () => {
-  if (inputText.trim() !== "") {
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { text: inputText, sender: "user" },
-    ]);
-
-
-    setInputText("");
-    setIsTyping(false);
-     
-    
-    try {
-      const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: inputText }),
-      });
-
-      const botResponses = await response.json();
-
-      botResponses.forEach((response) => {
-        if (response.text === "TriggerPopupAction") {
-          setShowDelayedPopup(true);
-          // setDisableBotMessages(true);
-        } else {
-          // if(!showDelayedPopup){
-            // setTimeout(() => {
-              setMessages((prevMessages) => [
-                ...prevMessages,
-                { text: response.text, sender: "bot" },
-              ]);
-              // }, 1000);
-          // }
-          handleTextToSpeech1(response.text);
-          handleMessageFromRasa(response.text);
-        }
-      });
-      const userInput = inputText.toLowerCase();
-      if (!showDelayedPopup && (userInput === "no")) {
-        setShowDelayedPopup(true);
-        // setDisableBotMessages(true);
-      }
-    } catch (error) {
-      console.error('Error sending message to Rasa:', error);
-    }
-  }
-};
-const handlePopupToggle1 = () => {
-  
-  setShowDelayedPopup(true);
-  setIsTTSActive(false);
-  setIsTyping(false);
-  setIsBlinkingActive(showDelayedPopup);
-};
-
- const handleSpeechToText = () => {
-    setIsTyping(true);
-    if (window.hasOwnProperty("webkitSpeechRecognition")) {
-      // isBlinkingActive(false);
-      setIsTTSActive(true);
-      const recognition = new window.webkitSpeechRecognition();
-      recognition.lang = "en-US";
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
-
-      recognition.start();
-
-      recognition.onresult = function (event) {
-        const transcript = event.results[0][0].transcript;
-        setInputText(transcript);
-        handleSendMessage();
-      };
-
-      recognition.onerror = function (event) {
-        console.log("Error occurred in recognition: ", event.error);
-      };
-    } else {
-      alert("Your browser does not support speech recognition.");
-    }
-    
- };
- useEffect(() => {
-  if (messagesRef.current) {
-    messagesRef.current.scrollTo({
-      behavior: "smooth",
-      top: messagesRef.current.scrollHeight,
-    })
-  }
-}, [messages]);
-
 useEffect(() => {
   let typingTimeout;
-
+  // if (!isPopupVisible) {
   const handleTypingTimeout = () => {
     // Send a "bye" message to the bot
     setMessages((prevMessages) => [
@@ -309,46 +189,121 @@ useEffect(() => {
     };
 
     sendByeMessage(); // Send "bye" message to Rasa
-  };
-
-  if (!showDelayedPopup&&!isTyping && !isTTSActive && messages.length > 0) {
-    typingTimeout = setTimeout(handleTypingTimeout, 15000); // 10 seconds timeout
-  }
-  else if (showDelayedPopup&&!isTyping && !isTTSActive && messages.length > 0) {
-    typingTimeout = setTimeout(handleTypingTimeout, 20000); // 10 seconds timeout
   }
 
+
+  if (!isTyping && !showDelayedPopup && !isTTSActive && messages.length > 0) {
+    typingTimeout = setTimeout(handleTypingTimeout, 15000); // 15 seconds timeout
+  }
+  else if(showDelayedPopup && !isTTSActive && messages.length>0){
+    typingTimeout = setTimeout(handleTypingTimeout, 30000); // 15 seconds timeout
+  }
   return () => {
-    clearTimeout(typingTimeout); // Clear the timeout if component unmounts or user starts typing
+    clearTimeout(typingTimeout); 
   };
-}, [isTyping, isTTSActive, messages, showDelayedPopup]);
+}, [isTyping, isTTSActive, messages, isPopupVisible]);
 
-useEffect(() => {
-  if (reloadPage) {
-    const reloadTimer = setTimeout(() => {
-      window.location.reload(true);
-    }, 3000);
-    return () => clearTimeout(reloadTimer);
+const handleSendMessage = async () => {
+  if (inputText.trim() !== "") {
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { text: inputText, sender: "user" },
+    ]);
+
+    setInputText("");
+
+    try {
+      const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: inputText }),
+      });
+
+      const botResponses = await response.json();
+
+      // if (!showDelayedPopup) {
+          botResponses.forEach((response) => {
+            if (response.text === "TriggerPopupAction") {
+              setShowDelayedPopup(true);
+              // setDisableBotMessages(true);
+            } else {
+              // if(!showDelayedPopup){
+                // setTimeout(() => {
+                  setMessages((prevMessages) => [
+                    ...prevMessages,
+                    { text: response.text, sender: "bot" },
+                  ]);
+                  // }, 1000);
+              // }
+              handleTextToSpeech1(response.text);
+              handleMessageFromRasa(response.text);
+            }
+          });
+      
+
+      const userInput = inputText.toLowerCase();
+      if (!showDelayedPopup && (userInput === "no")) {
+        setShowDelayedPopup(true);
+        // setDisableBotMessages(true);
+      }
+    
+    } catch (error) {
+      console.error('Error sending message to Rasa:', error);
+    }
   }
-}, [reloadPage]);
+};
+
+
+
+
+ const handleSpeechToText = () => {
+    if (window.hasOwnProperty("webkitSpeechRecognition")) {
+      setIsTTSActive(true);
+      const recognition = new window.webkitSpeechRecognition();
+      recognition.lang = "en-US";
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.start();
+
+      recognition.onresult = function (event) {
+        const transcript = event.results[0][0].transcript;
+        setInputText(transcript);
+        handleSendMessage();
+      };
+
+      recognition.onerror = function (event) {
+        console.log("Error occurred in recognition: ", event.error);
+      };
+    } else {
+      alert("Your browser does not support speech recognition.");
+    }
+    
+ };
+ useEffect(() => {
+  if (messagesRef.current) {
+    messagesRef.current.scrollTo({
+      behavior: "smooth",
+      top: messagesRef.current.scrollHeight,
+    })
+  }
+}, [messages]);
+
 
  return (
-    <div className="app1">
+    <div className="app1" id="bgapp">
+      <div className="logoeng"/>
       {showDelayedPopup && <div className="chat-overlay"/>}
       <div className="talking-animation">
       {isTTSActive && <TalkingAnimation />}
        </div>
-       
-       <div className="blinking-animation">
-      {!isTTSActive && showDelayedPopup && <BlinkingAnimation />}
-    </div>
-
-    <div className="nodding-animation">
-      {!isTTSActive && !showDelayedPopup && !isTyping && <NoddingAnimation />}
-    </div>
-    
-  
-
+       <div className="nodding-animation">
+        {!isTTSActive && <NoddingAnimation />}
+       </div>
+      
+      
       <div className="chat-room">
         <div className="messages" ref={messagesRef}>
           {messages.map((message, index) => (
@@ -369,8 +324,6 @@ useEffect(() => {
           <button onClick={handleSpeechToText} className="button2"></button>
           <button onClick={handlePopupToggle1} className="button3"></button>
           <button onClick={handleFeedback} className="button4">FB</button> 
-         
-          {/* <button onClick={handlePopupToggle2} className="button3"></button> */}
         </div>
       </div>
       {showDelayedPopup && (
@@ -391,4 +344,4 @@ useEffect(() => {
  );
 }
 
-export default App1;
+export default App1;
