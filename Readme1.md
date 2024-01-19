@@ -104,7 +104,12 @@ Follow the instructions on the https://github.com/xtekky/gpt4free/blob/main/READ
     ```bash
     rasa run -m models --enable-api --cors "*" --debug
     ```
-
+3. Running the actions:
+   Navigate to the rasa-env directory and then run rasa bot.
+    ```bash
+    cd rasa-env
+    rasa run actions 
+    ```
 ### Running the React App
 1. Start the React app:
     ```bash
