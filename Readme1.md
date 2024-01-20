@@ -7,7 +7,7 @@ Join us in revolutionizing Namami Gange! This project is a crucial part of the N
 
 - [Overview](#Overview)
 - [Prerequisites](#prerequisites)
-- [Installation](#installation)
+- [Setup](#Setup)
 - [Configuration](#configuration)
 - [Usage](#usage)
 
@@ -20,7 +20,7 @@ Provide a brief overview of your project, including its purpose and key features
 - Additionally, Node.js and npm need to be installed
 
 
-## Installation
+## Setup
 
 # Rasa Installation Guide
 
@@ -28,13 +28,13 @@ This guide provides step-by-step instructions for installing Rasa without using 
 
 ## Prerequisites
 
-- Python (Make sure you have Python installed on your system. You can download the latest version from the [official Python website](https://www.python.org/)).
+- Python (Make sure you have Python installed on your system. You can download python 3.8  version from the [official Python website](https://www.python.org/)).
 
-## Installation Steps
+## Installing Dependencies
 
 ### 1. Create a Virtual Environment
 
-Open a terminal or command prompt and navigate to the directory where you want to create your virtual environment. Run the following commands:
+Open a terminal or command prompt and navigate to the repository cloned to create your virtual environment. Run the following commands:
 
 #### On Windows:
 
@@ -78,13 +78,11 @@ This command should display the installed Rasa version.
 
 
 
-
-These steps assume you have Python 3.8 already installed on your system. Adjust the Python version accordingly if needed. 
-
 Remember, using a virtual environment is a good practice to isolate project dependencies. Adjustments might be necessary based on your specific project setup or any specific libraries you're using.
 
 # React App
-Make sure to have Node.js and my-react-app installed beforehand.
+In terminal navigate to the my-react-app directory.
+Make sure to have Node.js and npm installed beforehand.
 ```bash
 # Navigate to the React app directory
 cd my-react-app
@@ -92,9 +90,11 @@ cd my-react-app
 npm install
 ```
 # G4F
+
 Follow the instructions on the https://github.com/xtekky/gpt4free/blob/main/README.md to clone and setup the repository needed for the chatbot.
 
 ## Usage
+
 ### Setting Up Rasa
 1. Train the Rasa chatbot:
     ```bash
@@ -105,7 +105,7 @@ Follow the instructions on the https://github.com/xtekky/gpt4free/blob/main/READ
     rasa run -m models --enable-api --cors "*" --debug
     ```
 3. Running the actions:
-   Navigate to the rasa-env directory and then run rasa bot.
+   Split the terminal and navigate to the rasa-env directory and then run rasa bot.
     ```bash
     cd rasa-env
     rasa run actions 
