@@ -310,9 +310,9 @@ input {
   font-size:xx-large;
   font-family: 'Poppins', sans-serif;
   transition: background-color 0.3s ease;
-  position:relative;
-  right:12%;
-  top: 12%;
+  position:absolute;
+  left:32%;
+  top: 47%;
 }
 .eng:hover {
   color: black;
@@ -339,7 +339,7 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+/*   height: 100vh; */
   /* margin-right: 20%;
   margin-left: 20%;
   margin-bottom: 40%; */
