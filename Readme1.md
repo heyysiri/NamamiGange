@@ -1,3 +1,4 @@
+
 # AI ML Powered chatbot on Namami Gange
 
 ## Description
@@ -6,18 +7,18 @@ Join us in revolutionizing Namami Gange! This project is a crucial part of the N
 ## Table of Contents
 
 - [Overview](#Overview)
-- [Prerequisites](#prerequisites)
+- [Dependencies](#Dependencies)
 - [Setup](#Setup)
 - [Configuration](#configuration)
 - [Usage](#usage)
 
 ## Overview
 
-Provide a brief overview of your project, including its purpose and key features. Mention the technologies used, such as Rasa framework, React app, and the G4F repository.
+An interactive AI-ML chatbot with the personality and animation of Cha-cha Chaudary ( The mascot of Namami Gange project)  that educates the users about the components of Namami Gange and quizzes them.
 
-## Prerequisites
-- Ensure you have Python 3.8 installed
-- Additionally, Node.js and npm need to be installed
+## Dependencies
+* Ensure you have Python version 3.8 installed
+* Additionally, Node.js and npm need to be installed
 
 
 ## Setup
@@ -30,7 +31,7 @@ This guide provides step-by-step instructions for installing Rasa without using 
 
 - Python (Make sure you have Python installed on your system. You can download python 3.8  version from the [official Python website](https://www.python.org/)).
 
-## Installing Dependencies
+## Installation Steps
 
 ### 1. Create a Virtual Environment
 
@@ -77,7 +78,6 @@ rasa --version
 This command should display the installed Rasa version.
 
 
-
 Remember, using a virtual environment is a good practice to isolate project dependencies. Adjustments might be necessary based on your specific project setup or any specific libraries you're using.
 
 # React App
@@ -91,7 +91,24 @@ npm install
 ```
 # G4F
 
-Follow the instructions on the https://github.com/xtekky/gpt4free/blob/main/README.md to clone and setup the repository needed for the chatbot.
+To clone G4f in action folder, run:
+
+
+```
+#activate the venv
+venv/Scripts/Activate
+#change the directory
+cd actions
+#cloning the repository
+git clone https://github.com/xtekky/gpt4free.git
+#Installing requirements
+pip install -r requirements.txt
+```
+For any doubts, refer https://github.com/xtekky/gpt4free/blob/main/README.md?plain=1
+# Openweather API
+1. Open the following link and sign in https://home.openweathermap.org/users/sign_in
+2. Enter an API keyname and click generate.
+3. Copy the API key and enter it in the actions.py file inside the ActionWeatherEnglish and ActionWeatherHindi class. 
 
 ## Usage
 
@@ -120,8 +137,9 @@ Follow the instructions on the https://github.com/xtekky/gpt4free/blob/main/READ
     ```
 
 ## Configuration
-- **Rasa Configuration**: Find configuration files for Rasa NLU and Core in the `rasa_chatbot` directory.
+- **Rasa Configuration**: Find configuration files for Rasa NLU and Core in the `NamamiGange` directory.
 - **React App Configuration**: Configuration files for the React app can be found in the `my-react-app` directory.
+- **OpenWeather API Configuration**: You can find the cofiguration for the API in actions.py
 
 
 ## Acknowledgements
