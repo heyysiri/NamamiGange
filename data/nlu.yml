@@ -1,31 +1,6 @@
 version: "3.1"
 nlu:
-# - intent: greet
-#   examples: |
-#     - hey
-#     - hello
-#     - hi
-#     - hello there
-#     - good morning
-#     - good evening
-#     - moin
-#     - hey there
-#     - let's go
-#     - hey dude
-#     - goodmorning
-#     - goodevening
-#     - good afternoon
 
-# - intent: greet_hi
-#   examples: |
-#     - नमस्ते
-#     - हैलो
-#     - कैसे हो
-#     - राम राम
-#     - क्या हाल है
-#     - हाय
-#     - शुभ प्रभात
-#     - शुभ संध्या
 - intent: select_language_eng
   examples: |
     - [English](language)

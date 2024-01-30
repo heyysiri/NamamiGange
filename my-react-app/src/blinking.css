@@ -1,23 +1,21 @@
 @import url(https://fonts.googleapis.com/css?family=Oswald);
 body{  
-  background-color: lightblue;
+  background-color: #333;
   font-family:arial;
   color:silver;
 }
 a{color:orange;}
-.talkingcharacter {
-  background: url(https://bg-so-1.zippyimage.com/2024/01/05/cc4f50ef7706876fe74fba4c34f494b3.png);
-  width: 655px;  
-  height: 1000px;  
-  position: absolute;
-  left: 5%; /* Adjust this value to position it to the left */
-  top: 50%;
-  transform: translateY(-50%);
+.blinkingcharacter {
+  background: url(https://bg-so-1.zippyimage.com/2024/01/08/90d4de550c6ea30a9240fc9f789942aa.png);
+  width: 655px;  height:1000px;  
+  position:absolute;
   zoom: 0.62;
-  display: flex;
-  padding: 10px; 
-  /* Other styles as needed */
+  left:25%;
+  top:15%;  
+  transform: translate(-50%,-15%);
+  padding: 10px;
 }
+
 @media (max-width: 600px) {
   .character {
     display: none;

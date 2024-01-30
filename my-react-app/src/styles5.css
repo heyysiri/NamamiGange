@@ -6,7 +6,6 @@ body {
 }
 
 .quiz-container {
-  /*width: 80%;*/
   width: 500px;
   height: 500px;
   margin: 50px auto;
@@ -16,7 +15,6 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: opacity 0.5s ease-in-out;
-  /* background-color: darkcyan; */
   background-image: url(images/waterflow.gif);
   background-size:cover;
   position: static;
@@ -29,7 +27,6 @@ body {
 .options button {
   display: block;
   width: 100%;
-  /* width: 30px; */
   height: 47px;
   margin: 10px auto;
   padding: 10px 20px;
@@ -48,12 +45,9 @@ body {
   background-color: black;
 }
 
-
 .next-btn:hover {
   background-color: #1e87dc;
 }
-
-
 
 .message {
   font-size: 24px;
@@ -66,17 +60,15 @@ body {
 
 }
 .correct-answer {
-  background-color: #4caf50; /* Green background for correct answer */
+  background-color: #4caf50; 
   color: white;
-  background-image: url(images/whistle_no_bg.gif);
 }
 
-/* Styles for incorrect answer */
 .incorrect-answer {
-  background-color: #f44336; /* Red background for incorrect answer */
-  color: white;
+  background-color: #f44336; 
+  color: black;
 }
 .answer-result {
   opacity: 1;
-  transition: opacity 1s ease-in-out; /* Transition effect for opacity */
+  transition: opacity 1s ease-in-out; 
 }

@@ -11,15 +11,17 @@ const [showHelloAnimation, setShowHelloAnimation] = useState(true);
   };
 
   return (
-    <div className="app">
-        <div className="hello-animation">
+    <div className="app" id="bgimg">
+      <div className="textbox-gif"/>
+      <div className="hello-animation">
       {showHelloAnimation && <HelloAnimation />} 
       </div>
       <div className="language-buttons">
         <button className="eng" onClick={() => handleLanguageSelection("English")}>English</button>
-        <button className="hi" onClick={() => handleLanguageSelection("Hindi")}>Hindi</button>
+        <button className="hi" onClick={() => handleLanguageSelection("Hindi")}>हिन्दी</button>
       </div>
-    </div>
+      </div>
+    
     
   );
 }

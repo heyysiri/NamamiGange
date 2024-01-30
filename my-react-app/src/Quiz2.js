@@ -1,5 +1,6 @@
 import React, { useState, useEffect, } from "react";
 import "./styles5.css";
+import CorrectAnswerGif from "./whistle_no_bg.gif";
 
 
 const questions = [
@@ -97,9 +98,7 @@ const QuizNo2 = (props) => {
 
 
   const storedcurrentQuestion = localStorage.getItem("quizProgress") ? JSON.parse(localStorage.getItem("quizProgress")) : 0;
-//   console.log(storedcurrentQuestion);
   const [currentQuestion, setCurrentQuestion] = useState(storedcurrentQuestion);
-  // const [storage, setClearStorage] = useState(false);
   const [optionSelected, setOptionSelected] = useState(false);
   const [quizContainerVisible, setQuizContainerVisible] = useState(true);
   const [loadedQuestion, setLoadedQuestion] = useState(questions[currentQuestion]);
@@ -107,6 +106,7 @@ const QuizNo2 = (props) => {
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const [Incorrect , setIncorrect] = useState(null);
   const [messageToShow, setMessageToShow] = useState("");
+  const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
 
   if(currentQuestion===questions.length){
     localStorage.clear();
@@ -136,17 +136,19 @@ const QuizNo2 = (props) => {
     setSelectedAnswer(selectedOption);
 
     if (selectedOption === correctAnswer) { 
-      setCorrectAnswer("Sahi jawab!");
+      setIsCorrectAnswer(true);
+      setCorrectAnswer("Correct answer!");
       setOptionSelected(true);
       setTimeout(() => {
+      setIsCorrectAnswer(false);
       setCorrectAnswer("");
       setCurrentQuestion((currentQuestion) => {
         const nextQuestion = currentQuestion + 1;
-        localStorage.setItem("currentQuestion", nextQuestion); // Store the current question in localStorage
+        localStorage.setItem("currentQuestion", nextQuestion); 
         setOptionSelected(false);
         setLoadedQuestion(questions[nextQuestion] ? questions[nextQuestion] : null);
         if ((nextQuestion ) % 2 === 0) {
-          props.onClose() // Hide the quiz container after every two questions
+          props.onClose() 
       }
         return nextQuestion;
       });
@@ -157,30 +159,25 @@ const QuizNo2 = (props) => {
       
     } else { 
       setOptionSelected(true);
-      setIncorrect(`Galat jawab. Sahi jawab: ${questions[currentQuestion]?.answer}`);
+      setIncorrect(`Incorrect answer. Correct answer: ${questions[currentQuestion]?.answer}`);
       setTimeout(() => {
         setCurrentQuestion((currentQuestion) => {
           const nextQuestion = currentQuestion + 1;
-          localStorage.setItem("currentQuestion", nextQuestion); // Store the current question in localStorage
+          localStorage.setItem("currentQuestion", nextQuestion); 
           setOptionSelected(false);
           setLoadedQuestion(questions[nextQuestion] ? questions[nextQuestion] : null);
           if ((nextQuestion ) % 2 === 0) {
-              props.onClose() // Hide the quiz container after every two questions
+              props.onClose() 
           } 
           return nextQuestion;
         });
         setIncorrect("");
-      }, 3000); // 3000 milliseconds = 3 seconds
+      }, 3000); 
 
     }
     localStorage.setItem("quizProgress", JSON.stringify(currentQuestion));
     if((currentQuestion + 1) %2===0) {
       setQuizContainerVisible(false)
-
-      setMessageToShow("BHOT ACCHE");
-      setTimeout(() => {
-        setMessageToShow("");
-      }, 3000); 
     }
 
   }
@@ -209,7 +206,7 @@ const QuizNo2 = (props) => {
       )}
       {correctAnswer && <p className="correct-answer">{correctAnswer}</p>}
       {Incorrect && <p className="incorrect-answer">{Incorrect}</p>}
-      {messageToShow && <p className="display-message">{messageToShow}</p>}
+      {isCorrectAnswer && <img src={CorrectAnswerGif} alt="Correct Answer GIF" className="correct-answer-gif" />}
   
     </div>
     </>

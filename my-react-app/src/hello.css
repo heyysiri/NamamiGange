@@ -8,15 +8,20 @@ a{color:orange;}
 .character {
     background: url(https://bg-so-1.zippyimage.com/2023/12/28/d30bbe7da1713128d593f80352944874.png);
     width: 30%;
-    height:100%; 
+    height:90%; 
     position:fixed;
-    zoom: 0.70;
+    bottom: 15%;
+    zoom: 0.77;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    /* padding: 10px;  */
     display: flex;
 }
-
+@media (max-width: 600px) {
+  .character {
+    display: none;
+  }
+}
 @media screen and (max-width: 800px) {
     .character {
       display: none;;

@@ -10,7 +10,7 @@ a{color:orange;}
   /* width: 565px;  
   height:400px;  */
   position:absolute;
-  left:15%;
+  left:25%;
   top:50%;  
   transform: translate(-50%,-50%);
   width: 30%;
@@ -23,7 +23,11 @@ a{color:orange;}
     display: flex;
 }
 
-
+@media (max-width: 600px) {
+  .character {
+    display: none;
+  }
+}
 
 #textS{ 
   color:#000;

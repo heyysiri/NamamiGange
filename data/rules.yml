@@ -48,16 +48,3 @@ rules:
   - intent: generate_text_hi
   - action: action_gpt2_hi
   wait_for_user_input: false
-# - rule: deactivate loop after goodbye
-#   steps:
-#   - intent: text_fb
-#   - action: action_feedback1
-#   # - action: action_deactivate_loop
-#   # wait_for_user_input: false
-
-# - rule: deactivate loop after goodbye hindi
-#   steps:
-#   - intent: text_fb_hi
-#   - action: action_feedback1
-#   # - action: action_deactivate_loop
-#   # wait_for_user_input: false

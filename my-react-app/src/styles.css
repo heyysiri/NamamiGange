@@ -1,9 +1,9 @@
-/* styles2.css */
+/* styles.css */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
-  background-color: white;
+  background-color: darkgrey;
 }
 
 .app {
@@ -11,21 +11,18 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   height: 100vh;
-  /* background-color: lightblue; */
 }
 .app1 {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   height: 100vh;
-  /* background-color: lightblue; */
 }
 .app2 {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   height: 100vh;
-  /* background-color: lightblue; */
 }
 
 
@@ -52,6 +49,15 @@ body {
   flex: 1;
   
 }
+.blinking-animation{
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex: 1;
+  
+}
 
 .chat-room {
   border: 1px white;
@@ -61,16 +67,19 @@ body {
   flex-direction: column;
   overflow-y:scroll;
   transition: overflow-y 0.3s ease;
-  /* justify-content: flex-end; /* Ensure the content aligns to the bottom */
-  /* align-items: flex-end; */ 
 }
 
 @media screen and (max-width: 600px) {
   .chat-room {
     width: 100%;
-    height: 100vh;
+    height: 70vh;
   }
+  .messages {
+    width: 100%; 
+  }
+  
 }
+
 
 @media screen and (min-width: 601px) {
   .chat-room {
@@ -89,10 +98,7 @@ body {
 
 @media screen and (max-width: 600px) {
   .messages {
-    width: 30%;
-    display: flex;
-    flex-direction: flex-end;
-    flex-direction: column;
+    width: 100%;
   }
 }
 
@@ -104,8 +110,8 @@ body {
   left: 36%;
   width: 970px;
   height: 700px;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
-  z-index: 99; /* Ensure the overlay is above the chatroom */
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 99; 
 }
 
 .user,
@@ -138,42 +144,18 @@ body {
   background-color:blue;
 }
 
-/*.chat-bubble {
-  padding: 8px;
-  display: inline-block;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  overflow-wrap: anywhere;
-}*/
-/*.chat-bubble {
-  background-position: center;
-  background-repeat: no-repeat !important;
-  background-size: 100% 100%;
-  margin: 0 auto;
-  text-align: center;
-  height: 0;
-  box-sizing: content-box;
-  line-height: 1;
-}
-.speech {
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/speech-bubble.svg);
-  width: 25%;
-  padding-top: 6%;
-  padding-bottom: 20%;
-  overflow-wrap: anywhere;
-}*/
 
-.messages {
+/* .messages {
   flex: 1;
   padding: 10px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   color: white;
-}
+} */
 .chat-bubble {
   display: flex;
-  background-color: lightsalmon;
+  background-color: rgb(19, 112, 162);
   padding: 20px;
   border-radius: 30px;
   min-width: 40px;
@@ -185,11 +167,27 @@ body {
   justify-content: center;
   text-align: center;
   overflow-wrap: anywhere;
+  z-index: 10;
 }
+
+@media screen and (max-width: 480px) {
+  .chat-bubble {
+    padding: 15px; 
+    font-size: 14px; 
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .chat-bubble {
+    padding: 10px; 
+    font-size: 12px;
+  }
+}
+
 .chat-bubble:before,
 .chat-bubble:after {
   content: "";
-  background-color: lightsalmon;
+  background-color: rgb(19, 112, 162);
   border-radius: 50%;
   display: block;
   position: absolute;
@@ -201,7 +199,7 @@ body {
   height: 44px;
   top: -12px;
   left: 28px;
-  box-shadow: -50px 30px 0 -12px lightsalmon;
+  box-shadow: -50px 30px 0 -12px rgb(19, 112, 162);
 }
 .user .chat-bubble:after {
   bottom: -10px;
@@ -209,10 +207,10 @@ body {
   width: 30px;
   height: 30px;
   box-shadow:
-    40px -34px 0 0 lightsalmon,
-    -28px -6px 0 -2px lightsalmon,
-    -24px 17px 0 -6px lightsalmon,
-    -5px 25px 0 -10px lightsalmon;
+    40px -34px 0 0 rgb(19, 112, 162),
+    -28px -6px 0 -2px rgb(19, 112, 162),
+    -24px 17px 0 -6px rgb(19, 112, 162),
+    -5px 25px 0 -10px rgb(19, 112, 162);
 }
 
 .bot .chat-bubble:before {
@@ -221,10 +219,10 @@ body {
   top: -12px;
   right: 30px;
   box-shadow:
-    -50px 30px 0 -12px lightsalmon,
-    44px 20px 0 0 lightsalmon,
-    -10px 17px 0 -6px lightsalmon,
-    -5px 25px 0 -10px lightsalmon;
+    -50px 30px 0 -12px rgb(19, 112, 162),
+    44px 20px 0 0 rgb(19, 112, 162),
+    -10px 17px 0 -6px rgb(19, 112, 162),
+    -5px 25px 0 -10px rgb(19, 112, 162);
 }
 .bot .chat-bubble:after {
   bottom: -10px;
@@ -232,10 +230,10 @@ body {
   width: 30px;
   height: 30px;
   box-shadow:
-    40px -34px 0 0 lightsalmon,
-    -28px -6px 0 -2px lightsalmon,
-    -24px 17px 0 -6px lightsalmon,
-    -5px 25px 0 -10px lightsalmon;
+    40px -34px 0 0 rgb(19, 112, 162),
+    -28px -6px 0 -2px rgb(19, 112, 162),
+    -24px 17px 0 -6px rgb(19, 112, 162),
+    -5px 25px 0 -10px rgb(19, 112, 162);
 }
 
 
@@ -248,47 +246,53 @@ body {
 .input-container {
   display: flex;
   padding: 25px;
+  color: lightblue;
 }
 
 input {
   flex: 1;
   margin-right: 10px;
   border-radius: 50px;
+  background-color: transparent;
+  border-color: solid white;
+  border-width:5px;
 }
 .eng{
-  background-color: #4caf50;
+  background-color: transparent;
   color: white;
-  border-radius: 150px;
-  border: none;
-  padding: 35px 70px;
+  border: 1px;
+  margin-right: 120px;
   cursor: pointer;
-  font-size: small;
+  font-size:xx-large;
   font-family: 'Poppins', sans-serif;
   transition: background-color 0.3s ease;
+  position:absolute;
+  left: 32%;
+  top: 47%;
 }
 .eng:hover {
-  background-color: #1e87dc;
+  color: black;
 }
 .hi{
-  background-color: #4caf50;
+  background-color: transparent;
   color: white;
-  border-radius: 150px;
-  border: none;
-  padding: 35px 70px;
+  border: 1px;
+  margin-left: 150px;
   cursor: pointer;
-  font-size: small;
+  font-size: xx-large;
   font-family: 'Poppins', sans-serif;
   transition: background-color 0.3s ease;
+  position: absolute;
+  right:32.5%;
+  top: 47%;
 }
 .hi:hover {
-  background-color: #1e87dc;
+  color: black;
 }
 .language-buttons{
   display: flex;
   justify-content: center;
-  align-items:center;
-  height: 100vh;
-  margin-right: 500px;
+  align-items: center;
 }
 .button1 {
   background-image: url(images/send-message.png);
@@ -297,13 +301,13 @@ input {
   background-size: cover;
   width: 27px;
   height: 30px;
-  border: 1px solid white;
-  color: white;
+  border: 1px solid transparent;
+  background-color: transparent;
   cursor: pointer;
   margin-right: 2px;
 }
 .button1:hover {
-  background-color: lightblue;
+  background-color:transparent;
   box-shadow:
     0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
@@ -316,16 +320,162 @@ input {
   background-repeat: no-repeat;
   background-size: cover;
   width: 40px;
-  height: 30px;
-  border: 1px lightblue;
-  background-color: lightblue;
+  height: 40px;
+  border: 1px transparent;
+  background-color: transparent;
   cursor: pointer;
   margin-left: 4px;
 }
 .button2:hover {
-  background-color: lightblue;
+  background-color: transparent;
   box-shadow:
     0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
   opacity: 0.7;
 }
+.button3 {
+  width: 10px;
+  height: 30px;
+  border: 1px transparent;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: 1px;
+}
+.button4 {
+  width: 85px;
+  height: 40px;
+  border: 1px transparent;
+  background-color: lightblue ;
+  cursor: pointer;
+  margin-left: 1px;
+  border-radius: 10px;
+  border-style: groove;
+  font-weight: bold;
+
+
+}
+.image-response {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.logoeng
+{
+  width: 210px;
+  height: 140px;
+  left:1%;
+  top:2%;
+  position: absolute;
+  background-image: url(images/Namami_Gange_Logo_English-removebg-preview.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  padding: 1px;
+  
+
+}
+
+.logohin
+{
+  width: 210px;
+  height: 140px;
+  left:1%;
+  top:2%;
+  position: absolute;
+  background-image: url(images/Namami_Gange_Logo_Hindi-removebg-preview.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  padding: 1px;
+  
+
+}
+
+header {
+  background: linear-gradient(to bottom,rgb(19, 112, 162), rgb(71, 71, 158));
+  color: white;
+  padding: 5px;
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+  filter: blur(0.5px);
+  opacity:1;
+}
+
+@keyframes typing {
+  0% {
+    border-right: 0.15em solid rgba(255, 255, 255, 0.75);
+  }
+  50% {
+    border-right: 0.15em solid transparent;
+  }
+  100% {
+    border-right: 0.15em solid rgba(255, 255, 255, 0.75);
+  }
+}
+
+.typing-animation {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.15em solid rgba(255, 255, 255, 0.75);
+  animation: typing 1s steps(20) infinite;
+}
+
+#bgimg
+{
+  width: 100%;
+  height: 100%;
+  zoom:0.8;
+  position: absolute;
+  background-image: url(images/naturewithbanner.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-color: transparent;
+
+}
+
+.correct-answer-gif {
+  max-height: 100px; 
+  width: auto; 
+}
+
+
+.textbox-gif
+{
+  position:absolute;
+  left:25%;
+  top: 15%;
+  background-image: url(images/undertale_text_box.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  height: 78px;
+  width: 291px;
+  zoom: 1;
+}
+
+
+#bgapp
+{
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-image: url(images/natureRiver2.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  }

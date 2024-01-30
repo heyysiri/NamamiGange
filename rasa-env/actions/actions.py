@@ -1,5 +1,4 @@
 import g4f 
-from datetime import datetime, timedelta
 from rasa_sdk import Action, Tracker
 from typing import Any, Text, Dict, List
 from rasa_sdk.executor import CollectingDispatcher
@@ -8,7 +7,6 @@ import random
 import requests
 import sqlite3
 import asyncio
-import time
 class GPT3ChatCompletionAction(Action):
 
     def name(self):
@@ -27,7 +25,6 @@ class GPT3ChatCompletionAction(Action):
             prefix_eng = random.choice(chacha_prefix_eng)
             response = prefix_eng + " " + response + " " + selected_line_eng
             dispatcher.utter_message(text=str(response))
-            # await asyncio.sleep(10)
             dispatcher.utter_message(text="Please type 'cont' to continue after attempting quiz.")
         except Exception as e:
             dispatcher.utter_message(text=f"Failed to fetch response from {provider.__name__}: {e}")
@@ -99,6 +96,7 @@ class GPT3ChatCompletionActionHindi(Action):
             prefix_eng = random.choice(chacha_prefix_hi)
             response = prefix_eng + " " + response + " " + selected_line_eng
             dispatcher.utter_message(text=str(response))
+            dispatcher.utter_message(text="प्रश्नोत्तरी का प्रयास करने के बाद जारी रखने के लिए कृपया 'जारी रखें' टाइप करें।")
         except Exception as e:
             dispatcher.utter_message(text=f"Failed to fetch response from {provider.__name__}: {e}")
 
@@ -107,10 +105,9 @@ class GPT3ChatCompletionActionHindi(Action):
         user_message = tracker.latest_message.get('text')
         language = tracker.get_slot("language")
         language = language.lower()
-
-        if user_message.lower() == 'no':
+        if user_message == 'नहीं':
             print("User said no, moving on...")
-            dispatcher.utter_message("popup_triggered")
+            dispatcher.utter_message("जारी रखने के लिए कृपया 'जारी रखें' टाइप करें।")
             return []
 
         _providers = [
@@ -157,7 +154,7 @@ class ActionWeatherEnglish(Action):
         print("Got into action_weather_eng")
         language = tracker.get_slot("language")
         language = language.lower()
-        api_key = '357eb6ab3216918390b603bc4936188d'
+        api_key = '357eb6ab3216918390b603bc4936188d' #put YOUR API KEY here
         user_city = 'new delhi'
         base_url = f'http://api.openweathermap.org/data/2.5/weather?q={user_city}&appid={api_key}'
         response = requests.get(base_url)
@@ -213,7 +210,7 @@ class ActionWeatherHindi(Action):
         print("Got into action_weather_hi")
         language = tracker.get_slot("language")
         language = language.lower()
-        api_key = '357eb6ab3216918390b603bc4936188d'
+        api_key = '357eb6ab3216918390b603bc4936188d' #put YOUR API KEY here
         user_city = 'new delhi'
         base_url = f'http://api.openweathermap.org/data/2.5/weather?q={user_city}&appid={api_key}'
         response = requests.get(base_url)
@@ -288,23 +285,5 @@ class FEEDBACK1(Action):
 
         return []
     
-class CheckUserActivity(Action):
-    def name(self):
-        return "action_check_user_activity"
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        last_event_time = tracker.latest_message.get("timestamp")
-        current_time = datetime.now()
-        language = tracker.get_slot("language")
-        language = language.lower()
-        if last_event_time:
-            inactive_duration = current_time - last_event_time
-            # Check if the user has been inactive for 10 seconds
-            if inactive_duration > timedelta(seconds=10):
-                if(language=='english'):
-                    dispatcher.utter_message(response='utter_goodbye')
-                elif(language=='hindi'):
-                    dispatcher.utter_message(response='utter_goodbye_hi')
-
-        return []
     

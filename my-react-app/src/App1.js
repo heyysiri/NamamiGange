@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import "./styles.css";
 import MyPopup from "./Popup";
 import QuizNo1 from "./Quiz1";
-// import HelloAnimation from "./hello";
 import TalkingAnimation from "./talking";
 import NoddingAnimation from "./nodding";
+import BlinkingAnimation from "./blinking";
 
 function App1() {
  const [messages, setMessages] = useState([]);
@@ -23,14 +23,12 @@ function App1() {
       alert("Your browser does not support Text-to-Speech.");
     } else {
       setSynthesis(window.speechSynthesis);
-      // setIsTTSActive(true);
-      // console.log(isTTSActive)
     }
 
     return () => {
       if (synthesis && synthesis.speaking) {
         synthesis.cancel();
-        setIsTTSActive(false); // Update the TTS status accordingly
+        setIsTTSActive(false);
       }
     };
     
@@ -45,7 +43,6 @@ function App1() {
 
  const handlePopupToggle1 = () => {
    setShowDelayedPopup(true);
-  //  setDisableBotMessages(true);
  };
 
  const handleMessageFromRasa = (message) => {
@@ -75,9 +72,9 @@ const handleTextToSpeech1 = (text) => {
   if ('speechSynthesis' in window) {
     const speech = new SpeechSynthesisUtterance();
     speech.text = text;
-    speech.lang = 'en-US'; // Change according to your language
-    speech.pitch = 0.6; // Change the pitch (example value)
-    speech.rate = 2.0; // Change the rate (example value)
+    speech.lang = 'en-US'; 
+    speech.pitch = 0.6; 
+    speech.rate = 1.0; 
     speech.volume = 1.0;
     speech.onstart = () => {
       setIsTTSActive(true);
@@ -86,7 +83,6 @@ const handleTextToSpeech1 = (text) => {
       setIsTTSActive(false);
     };
     window.speechSynthesis.speak(speech);
-    // setIsTTSActive(true);
   } else {
     alert('Your browser does not support Text-to-Speech.');
   }
@@ -153,15 +149,12 @@ const sendInitialMessage = async () => {
 };
 useEffect(() => {
   let typingTimeout;
-  // if (!isPopupVisible) {
   const handleTypingTimeout = () => {
-    // Send a "bye" message to the bot
     setMessages((prevMessages) => [
       ...prevMessages,
       { text: "bye", sender: "user" },
     ]);
 
-    // Handle sending "bye" message to Rasa (similar to handleSendMessage)
     const sendByeMessage = async () => {
       try {
         const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
@@ -188,15 +181,15 @@ useEffect(() => {
       }
     };
 
-    sendByeMessage(); // Send "bye" message to Rasa
+    sendByeMessage();
   }
 
 
-  if (!isTyping && !showDelayedPopup && !isTTSActive && messages.length > 0) {
-    typingTimeout = setTimeout(handleTypingTimeout, 15000); // 15 seconds timeout
+  if (showDelayedPopup && !isTTSActive && messages.length>0) {
+    typingTimeout = setTimeout(handleTypingTimeout, 30000); 
   }
-  else if(showDelayedPopup && !isTTSActive && messages.length>0){
-    typingTimeout = setTimeout(handleTypingTimeout, 30000); // 15 seconds timeout
+  else if(!isTyping && !isTTSActive && messages.length>0){
+    typingTimeout = setTimeout(handleTypingTimeout, 15000); 
   }
   return () => {
     clearTimeout(typingTimeout); 
@@ -212,6 +205,12 @@ const handleSendMessage = async () => {
 
     setInputText("");
 
+    // Cancel ongoing speech synthesis if any
+    // if (synthesis && synthesis.speaking) {
+    //   synthesis.cancel();
+    //   setIsTTSActive(false); // Update the TTS status accordingly
+    // }
+
     try {
       const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
         method: 'POST',
@@ -223,20 +222,14 @@ const handleSendMessage = async () => {
 
       const botResponses = await response.json();
 
-      // if (!showDelayedPopup) {
           botResponses.forEach((response) => {
             if (response.text === "TriggerPopupAction") {
               setShowDelayedPopup(true);
-              // setDisableBotMessages(true);
             } else {
-              // if(!showDelayedPopup){
-                // setTimeout(() => {
                   setMessages((prevMessages) => [
                     ...prevMessages,
                     { text: response.text, sender: "bot" },
                   ]);
-                  // }, 1000);
-              // }
               handleTextToSpeech1(response.text);
               handleMessageFromRasa(response.text);
             }
@@ -246,7 +239,6 @@ const handleSendMessage = async () => {
       const userInput = inputText.toLowerCase();
       if (!showDelayedPopup && (userInput === "no")) {
         setShowDelayedPopup(true);
-        // setDisableBotMessages(true);
       }
     
     } catch (error) {
@@ -293,13 +285,17 @@ const handleSendMessage = async () => {
 
 
  return (
-    <div className="app1">
+    <div className="app1" id="bgapp">
+      <div className="logoeng" /> 
       {showDelayedPopup && <div className="chat-overlay"/>}
       <div className="talking-animation">
       {isTTSActive && <TalkingAnimation />}
        </div>
        <div className="nodding-animation">
-        {!isTTSActive && <NoddingAnimation />}
+        {!isTTSActive && !showDelayedPopup && !isTyping && <NoddingAnimation />}
+       </div>
+       <div className="blinking-animation">
+        {!isTTSActive && showDelayedPopup && <BlinkingAnimation />}
        </div>
       
       
@@ -322,20 +318,17 @@ const handleSendMessage = async () => {
           <button onClick={handleSendMessage} className="button1"></button>
           <button onClick={handleSpeechToText} className="button2"></button>
           <button onClick={handlePopupToggle1} className="button3"></button>
-          <button onClick={handleFeedback} className="button4">FB</button> 
+          <button onClick={handleFeedback} className="button4">Feedback</button> 
         </div>
       </div>
       {showDelayedPopup && (
         <MyPopup onClose={() => {
           setShowDelayedPopup(false);
           setIsPopupVisible(false);
-          // setDisableBotMessages(false);
-           // Enable bot messages when the popup disappears
         }}>
           <QuizNo1 onClose={() => {
             setShowDelayedPopup(false);
             setIsPopupVisible(false);
-            // setDisableBotMessages(false); // Enable bot messages when the popup disappears
           }} />
         </MyPopup>
       )}
