@@ -205,11 +205,10 @@ const handleSendMessage = async () => {
 
     setInputText("");
 
-    // Cancel ongoing speech synthesis if any
-    // if (synthesis && synthesis.speaking) {
-    //   synthesis.cancel();
-    //   setIsTTSActive(false); // Update the TTS status accordingly
-    // }
+    if (synthesis && synthesis.speaking) {
+      synthesis.cancel();
+      setIsTTSActive(false); 
+    }
 
     try {
       const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {

@@ -212,6 +212,11 @@ const handleSendMessage = async () => {
 
     setInputText("");
 
+    if (synthesis && synthesis.speaking) {
+      synthesis.cancel();
+      setIsTTSActive(false); 
+    }
+
     try {
       const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
         method: 'POST',
