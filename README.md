@@ -23,6 +23,12 @@ An interactive AI-ML chatbot with the personality and animation of Cha-cha Chaud
 
 ## Setup
 
+# Cloning the repository 
+
+```bash
+git clone https://github.com/heyysiri/NamamiGange.git
+```
+
 # Rasa Installation Guide
 
 This guide provides step-by-step instructions for installing Rasa without using a conda environment. You will use Python's virtual environments to set up and install Rasa on your system.
@@ -105,6 +111,7 @@ git clone https://github.com/xtekky/gpt4free.git
 pip install -r requirements.txt
 ```
 For any doubts, refer https://github.com/xtekky/gpt4free/blob/main/README.md?plain=1
+
 # Openweather API
 1. Open the following link and sign in https://home.openweathermap.org/users/sign_in
 2. Enter an API keyname and click generate.
@@ -146,6 +153,17 @@ For any doubts, refer https://github.com/xtekky/gpt4free/blob/main/README.md?pla
 - [Rasa](https://rasa.com/): The brain behind conversational AI.
 - [React](https://reactjs.org/): Creates the interactive chat interface.
 - [GPT-4-Free](link-to-gpt4-repository): Powers realistic and engaging conversations.
+  
+##Contributors
+Manogna [@manognavadla](https://github.com/manognavadla/)
+
+Pranava [@pranRV](https://github.com/pranRV)
+
+Shresta [@Shresta-Voruganti](https://github.com/Shresta-Voruganti)
+
+Shriani [@shrianireddy](https://github.com/shrianireddy)
+
+Siri [@heyysiri](https://github.com/heyysiri)
 
 ---
 
