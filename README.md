@@ -154,7 +154,8 @@ For any doubts, refer https://github.com/xtekky/gpt4free/blob/main/README.md?pla
 - [React](https://reactjs.org/): Creates the interactive chat interface.
 - [GPT-4-Free](link-to-gpt4-repository): Powers realistic and engaging conversations.
   
-##Contributors
+## Contributors
+
 Manogna [@manognavadla](https://github.com/manognavadla/)
 
 Pranava [@pranRV](https://github.com/pranRV)
