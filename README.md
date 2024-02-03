@@ -12,28 +12,28 @@ Join us in revolutionizing Namami Gange! This project is a crucial part of the N
 - [Configuration](#configuration)
 - [Usage](#usage)
 
-## Overview
+# Overview
 
 An interactive AI-ML chatbot with the personality and animation of Cha-cha Chaudary ( The mascot of Namami Gange project)  that educates the users about the components of Namami Gange and quizzes them.
 
-## Dependencies
+# Dependencies
 * Ensure you have Python version 3.8 installed
 * Additionally, Node.js and npm need to be installed
 
 
-## Setup
+# Setup
 
-# Cloning the repository 
+## Cloning the repository 
 
 ```bash
 git clone https://github.com/heyysiri/NamamiGange.git
 ```
 
-# Rasa Installation Guide
+## Rasa Installation Guide
 
 This guide provides step-by-step instructions for installing Rasa without using a conda environment. You will use Python's virtual environments to set up and install Rasa on your system.
 
-## Prerequisites
+### Prerequisites
 
 - Python (Make sure you have Python installed on your system. You can download python 3.8  version from the [official Python website](https://www.python.org/)).
 
@@ -86,7 +86,7 @@ This command should display the installed Rasa version.
 
 Remember, using a virtual environment is a good practice to isolate project dependencies. Adjustments might be necessary based on your specific project setup or any specific libraries you're using.
 
-# React App
+## React App
 In terminal navigate to the my-react-app directory.
 Make sure to have Node.js and npm installed beforehand.
 ```bash
@@ -95,7 +95,7 @@ cd my-react-app
 # Install dependencies
 npm install
 ```
-# G4F
+## G4F
 
 To clone G4f in action folder, run:
 
@@ -119,12 +119,12 @@ pip install -r requirements.txt
 ```
 For any doubts, refer https://github.com/xtekky/gpt4free/blob/main/README.md?plain=1
 
-# Openweather API
+## Openweather API
 1. Open the following link and sign in https://home.openweathermap.org/users/sign_in
 2. Enter an API keyname and click generate.
 3. Copy the API key and enter it in the actions.py file inside the ActionWeatherEnglish and ActionWeatherHindi class. 
 
-## Usage
+# Usage
 
 ### Setting Up Rasa
 1. Train the Rasa chatbot:
