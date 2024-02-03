@@ -99,15 +99,22 @@ npm install
 
 To clone G4f in action folder, run:
 
-
+Activate the venv
 ```
-#activate the venv
+activate the venv
 venv/Scripts/Activate
-#change the directory
+```
+Change the directory
+```
 cd actions
-#cloning the repository
+```
+Cloning the repository
+```
 git clone https://github.com/xtekky/gpt4free.git
-#Installing requirements
+```
+Installing requirements
+```
+cd gpt4free
 pip install -r requirements.txt
 ```
 For any doubts, refer https://github.com/xtekky/gpt4free/blob/main/README.md?plain=1
