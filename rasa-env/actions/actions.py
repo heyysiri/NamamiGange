@@ -41,7 +41,7 @@ class GPT3ChatCompletionAction(Action):
             return []
 
         _providers = [
-            g4f.Provider.You,
+            g4f.Provider.Koala,
         ]
         chacha_lines_eng = [
             "Chacha Chaudhary's brain works faster than a computer!",
@@ -111,7 +111,7 @@ class GPT3ChatCompletionActionHindi(Action):
             return []
 
         _providers = [
-            g4f.Provider.You,
+            g4f.Provider.Koala,
         ]
     
         chacha_lines_hi = [
