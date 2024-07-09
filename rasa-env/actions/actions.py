@@ -154,7 +154,7 @@ class ActionWeatherEnglish(Action):
         print("Got into action_weather_eng")
         language = tracker.get_slot("language")
         language = language.lower()
-        api_key = '357eb6ab3216918390b603bc4936188d' #put YOUR API KEY here
+        api_key = #put YOUR API KEY here
         user_city = 'new delhi'
         base_url = f'http://api.openweathermap.org/data/2.5/weather?q={user_city}&appid={api_key}'
         response = requests.get(base_url)
@@ -210,7 +210,7 @@ class ActionWeatherHindi(Action):
         print("Got into action_weather_hi")
         language = tracker.get_slot("language")
         language = language.lower()
-        api_key = '357eb6ab3216918390b603bc4936188d' #put YOUR API KEY here
+        api_key = #put YOUR API KEY here
         user_city = 'new delhi'
         base_url = f'http://api.openweathermap.org/data/2.5/weather?q={user_city}&appid={api_key}'
         response = requests.get(base_url)
