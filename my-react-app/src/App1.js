@@ -336,6 +336,3 @@ const handleSendMessage = async () => {
 }
 
 export default App1;
-
-//english
-//english
