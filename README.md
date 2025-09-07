@@ -4,6 +4,12 @@
 ## Description
 Join us in revolutionizing Namami Gange! This project is a crucial part of the Namami Gange initiative, blending the power of the Rasa framework and a user-friendly React app to create an intelligent chatbot system. By harnessing the prowess of GPT-4-Free, our goal is to enhance Namami Gange's outreach by providing an interactive and informative conversational interface. Imagine chatting with an AI assistant dedicated to answering queries and guiding you through the Namami Gange project.
 
+
+https://github.com/user-attachments/assets/bc3048fc-f4ce-426c-90cd-4a435f9c04f7
+
+
+
+
 ## Table of Contents
 
 - [Overview](#Overview)
